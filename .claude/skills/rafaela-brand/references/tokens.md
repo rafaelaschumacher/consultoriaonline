@@ -1,13 +1,25 @@
 # Tokens de marca — Rafaela Schumacher
 
+Parte do design system oficial da marca (ver `SKILL.md`). Estes valores **documentam a
+identidade existente** — nenhum deles foi criado ou ajustado para esta documentação;
+todos vêm diretamente da implementação de referência do site.
+
 Fonte real: `css/styles.css`, bloco `:root` (linhas 1–25) e o override de dark mode em
-`@media (prefers-color-scheme: dark)` (linhas 27–36).
+`@media (prefers-color-scheme: dark)` (linhas 27–36). **`styles.css` é a implementação
+de referência, não a identidade em si** — os valores abaixo são a identidade,
+independente de tecnologia (ver "Identidade vs. implementação de referência" em
+`SKILL.md`).
 
 Estes são os únicos valores de cor/fonte/raio/sombra/espaçamento que devem ser usados.
 Se uma necessidade não é coberta por nenhum destes, siga a regra "Realmente não existe
-nada parecido?" em `SKILL.md` antes de inventar um valor novo.
+nada parecido?" em `SKILL.md` antes de inventar um valor novo. Escalas que ainda não
+existem (tipografia, espaçamento, motion, z-index) **não estão nesta página** — estão
+listadas como "Decisões em aberto" em `SKILL.md`, de propósito, para não sugerir que já
+foram decididas.
 
 ## Cores
+
+*Camada A — identidade da marca.*
 
 | Token | Light | Dark | Uso |
 |---|---|---|---|
@@ -40,6 +52,9 @@ segunda paleta.
 
 ## Tipografia
 
+*Camada A — identidade da marca. (A escala completa de tamanhos/pesos por nível ainda
+não é oficial — ver "Decisões em aberto" em `SKILL.md`.)*
+
 - `--font-heading` e `--font-body`: **`'Plus Jakarta Sans'`**, com fallback
   `ui-sans-serif, system-ui, 'Segoe UI', sans-serif`. É a única família tipográfica da
   marca — usada tanto em títulos quanto em corpo de texto. Não introduza uma segunda
@@ -57,6 +72,9 @@ segunda paleta.
 
 ## Raios de borda
 
+*Camada B — token de suporte, reutilizável (não é "identidade" por si só, mas deve ser
+reaproveitado em vez de recriado).*
+
 | Token | Valor | Uso típico |
 |---|---|---|
 | `--radius-sm` | `10px` | Elementos pequenos. |
@@ -66,12 +84,18 @@ segunda paleta.
 
 ## Sombras
 
+*Camada B — token de suporte, reutilizável.*
+
 | Token | Valor | Uso |
 |---|---|---|
 | `--shadow-sm` | `0 3px 14px rgba(60, 60, 40, 0.07)` | Estado padrão de cards/botões. |
 | `--shadow-md` | `0 14px 34px rgba(60, 60, 40, 0.12)` | Estado hover/elevado. |
 
 ## Layout, espaçamento e breakpoints
+
+*Camada B — tokens de suporte, reutilizáveis. (Uma escala geral de espaçamento além
+destes dois valores específicos ainda não existe — ver "Decisões em aberto" em
+`SKILL.md`.)*
 
 - `--container-width: 1140px` — largura máxima do conteúdo (`.container`), com
   `padding: 0 24px`.
@@ -85,6 +109,16 @@ segunda paleta.
 
 ## Nomenclatura
 
+*Camada B — convenção reutilizável.*
+
 Todas as classes seguem BEM-like: `.bloco__elemento--modificador`
 (ex: `.plan-card__badge`, `.btn--outline`). Componentes novos devem seguir o mesmo
 padrão para manter o CSS legível e consistente com o resto do projeto.
+
+## O que não está nesta página
+
+Esta página só documenta o que já é oficial. Escala tipográfica completa, escala de
+espaçamento, motion tokens, z-index, sistema de ícones e estados de foco/erro/desabilitado
+**ainda não existem como decisão de marca** — estão listados em "Decisões em aberto" em
+`SKILL.md`. Para padrões de uso (ritmo de seção, bullets, ênfase, hover, dark mode), veja
+`references/patterns.md`.
