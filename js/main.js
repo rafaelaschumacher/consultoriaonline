@@ -1,5 +1,23 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Mobile menu
+const menuToggle = document.getElementById('menuToggle');
+const nav = document.getElementById('nav');
+
+menuToggle.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('is-open');
+  menuToggle.classList.toggle('is-open', isOpen);
+  menuToggle.setAttribute('aria-expanded', isOpen);
+});
+
+nav.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('is-open');
+    menuToggle.classList.remove('is-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
 // FAQ accordion
 document.querySelectorAll('.faq__question').forEach((btn) => {
   btn.addEventListener('click', () => {
