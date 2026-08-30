@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rafaelaschumacher.github.io/consultoriaonline/sitemap.xml

@@ -129,7 +129,6 @@ a:focus-visible, button:focus-visible {
   font-size: 0.78rem;
   margin-bottom: 14px;
 }
-.eyebrow--light { color: rgba(255,255,255,0.85); }
 .sparkle { color: var(--color-accent); font-size: 0.9em; }
 
 /* ===== Header / Navbar ===== */
