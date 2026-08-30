@@ -230,9 +230,17 @@ a:focus-visible, button:focus-visible {
 .about { background: var(--color-bg-alt); }
 .about__inner {
   display: grid;
-  grid-template-columns: 0.4fr 1fr;
+  grid-template-columns: 0.62fr 1fr;
   gap: 56px;
   align-items: center;
+}
+.about-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 .avatar-circle {
   width: 220px;
