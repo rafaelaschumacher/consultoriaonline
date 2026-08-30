@@ -55,15 +55,21 @@ segunda paleta.
 *Camada A — identidade da marca. (A escala completa de tamanhos/pesos por nível ainda
 não é oficial — ver "Decisões em aberto" em `SKILL.md`.)*
 
-- `--font-heading` e `--font-body`: **`'Plus Jakarta Sans'`**, com fallback
-  `ui-sans-serif, system-ui, 'Segoe UI', sans-serif`. É a única família tipográfica da
-  marca — usada tanto em títulos quanto em corpo de texto. Não introduza uma segunda
-  fonte "só para títulos" ou "só para um destaque".
-- Carregada via Google Fonts (pesos `400,500,600,700,800` normal + itálico
-  `500,600,700`). Ao portar para outro projeto/stack, garanta que os mesmos pesos
-  estejam disponíveis.
-- `h1`, `h2`, `h3`: `font-family: var(--font-heading)`, `font-weight: 700`,
-  `line-height: 1.2`, `letter-spacing: -0.01em`.
+- `--font-heading`: **`'Playfair Display'`**, com fallback `Georgia, 'Times New Roman',
+  serif`. Usada em `h1`/`h2`/`h3`, `.logo`, `.avatar-circle` e `.faq__question` — a marca
+  usa uma serifada para títulos/wordmark, contrastando com o corpo em sans-serif.
+- `--font-body`: **`'Plus Jakarta Sans'`**, com fallback `ui-sans-serif, system-ui,
+  'Segoe UI', sans-serif`. Usada no corpo de texto, eyebrows, botões, tags e navegação.
+- Não introduza uma terceira família "só para um destaque" — o par
+  serifada (títulos) + sans-serif (corpo) já é a identidade completa.
+- Plus Jakarta Sans carregada via Google Fonts (pesos `400,500,600,700,800` normal +
+  itálico `500,600,700`). Playfair Display carregada com pesos `500,600,700` normal +
+  itálico `600`. Ao portar para outro projeto/stack, garanta que os mesmos pesos
+  estejam disponíveis para as duas famílias.
+- `h1`, `h2`, `h3`: `font-family: var(--font-heading)`, `font-weight: 500`,
+  `line-height: 1.2`, `letter-spacing: 0`. `.logo`: peso `600`, `letter-spacing: 0.01em`.
+  `.avatar-circle`: peso `500`. `.faq__question` mantém peso `700` (mais impacto no
+  gatilho do accordion).
 - `<em>` é usado como **grifo de marca**, não itálico genérico: `font-style: italic`,
   `font-weight: 600`, `color: var(--color-primary-dark)`. É o padrão usado para destacar
   uma palavra-chave dentro de um título (ex: "caiba na *sua vida*"). Reutilize esse

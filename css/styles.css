@@ -11,7 +11,7 @@
   --color-border: #e6e0d0;
   --color-star: #c8a24d;
 
-  --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
 
   --radius-sm: 10px;
@@ -50,7 +50,7 @@ img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 button { font: inherit; cursor: pointer; border: none; background: none; }
-h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; color: var(--color-text); letter-spacing: -0.01em; }
+h1, h2, h3 { font-family: var(--font-heading); font-weight: 500; line-height: 1.2; color: var(--color-text); letter-spacing: 0; }
 em { font-style: italic; font-weight: 600; color: var(--color-primary-dark); }
 
 .container {
@@ -62,6 +62,18 @@ em { font-style: italic; font-weight: 600; color: var(--color-primary-dark); }
 
 section { padding: 96px 0; }
 @media (max-width: 768px) { section { padding: 64px 0; } }
+
+/* ===== Foco visível (navegação por teclado) ===== */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-primary-dark);
+  outline-offset: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  a:focus-visible, button:focus-visible { outline-color: var(--color-accent); }
+}
+/* .who e .final-cta têm fundo verde-escuro fixo (não muda com o modo),
+   então o outline também precisa ficar fixo em vez de seguir o modo. */
+.who :focus-visible, .final-cta :focus-visible { outline-color: #fff; }
 
 /* ===== Buttons ===== */
 .btn {
@@ -92,7 +104,8 @@ section { padding: 96px 0; }
 
 .logo {
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   font-size: 1.2rem;
   color: var(--color-primary-dark);
 }
@@ -117,7 +130,6 @@ section { padding: 96px 0; }
   font-size: 0.78rem;
   margin-bottom: 14px;
 }
-.eyebrow--light { color: rgba(255,255,255,0.85); }
 .sparkle { color: var(--color-accent); font-size: 0.9em; }
 
 /* ===== Header / Navbar ===== */
@@ -180,10 +192,11 @@ section { padding: 96px 0; }
     gap: 26px;
     padding: 32px;
     box-shadow: var(--shadow-md);
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    clip-path: inset(0 0 0 100%);
+    visibility: hidden;
+    transition: clip-path 0.3s ease, visibility 0s linear 0.3s;
   }
-  .nav.is-open { transform: translateX(0); }
+  .nav.is-open { clip-path: inset(0 0 0 0%); visibility: visible; transition: clip-path 0.3s ease, visibility 0s; }
   .nav__cta { margin-left: 0; width: 100%; white-space: normal; text-align: center; line-height: 1.3; }
   .menu-toggle { display: flex; }
   .menu-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -200,45 +213,17 @@ section { padding: 96px 0; }
 
 /* ===== Hero ===== */
 .hero { padding-top: 64px; padding-bottom: 96px; overflow: hidden; }
-.hero__inner {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: center;
-}
+.hero__inner { display: flex; justify-content: center; text-align: center; }
+.hero__content { max-width: 720px; }
 .hero h1 {
   font-size: clamp(2rem, 3.6vw, 3.1rem);
-  margin-bottom: 22px;
-}
-.hero__text {
-  color: var(--color-text-muted);
-  font-size: 1.08rem;
-  max-width: 520px;
   margin-bottom: 32px;
 }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
-  margin-bottom: 24px;
-}
-.hero__discreet {
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-}
-.photo-placeholder--hero {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  box-shadow: var(--shadow-md);
-}
-
-@media (max-width: 900px) {
-  .hero__inner { grid-template-columns: 1fr; }
-  .hero__content { text-align: center; }
-  .eyebrow { justify-content: center; }
-  .hero__text { margin-left: auto; margin-right: auto; }
-  .hero__actions { justify-content: center; }
-  .photo-placeholder--hero { max-width: 360px; margin: 0 auto; aspect-ratio: 1 / 1; }
 }
 
 /* ===== About ===== */
@@ -257,15 +242,14 @@ section { padding: 96px 0; }
   color: #fff;
   font-family: var(--font-heading);
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
   box-shadow: var(--shadow-md);
 }
-.about__content h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); margin-bottom: 6px; }
-.crn-note { color: var(--color-text-muted); font-size: 0.85rem; font-style: italic; margin-bottom: 16px; }
+.about__content h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); margin-bottom: 12px; }
 .about__content p { color: var(--color-text-muted); margin-bottom: 16px; }
 .about__tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
 .tag {
@@ -287,29 +271,15 @@ section { padding: 96px 0; }
 .who { background: var(--color-primary-dark); color: #fff; }
 .who__inner { display: flex; justify-content: center; }
 .who__content { max-width: 640px; text-align: center; }
-.who__content h2 { color: #fff; font-size: clamp(1.6rem, 2.8vw, 2.1rem); margin-bottom: 28px; }
-.who__list { display: inline-block; text-align: left; }
-.who__list li {
-  position: relative;
-  padding-left: 28px;
-  margin-bottom: 14px;
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.94);
-}
-.who__list li::before {
-  content: "\2726";
-  position: absolute;
-  left: 0;
-  top: 0.05em;
-  color: var(--color-accent);
-  font-size: 0.85em;
-}
+.who__content h2 { color: #fff; font-size: clamp(1.6rem, 2.8vw, 2.1rem); }
 
 /* ===== O que você recebe ===== */
 .includes__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  max-width: 940px;
+  margin: 0 auto;
 }
 .includes__item {
   background: var(--color-bg-alt);
@@ -329,22 +299,8 @@ section { padding: 96px 0; }
   font-size: 0.85em;
 }
 .includes__item p { font-size: 0.88rem; color: var(--color-text-muted); }
-.includes__sublist li {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  padding-left: 14px;
-  position: relative;
-  margin-bottom: 4px;
-}
-.includes__sublist li::before {
-  content: "\2013";
-  position: absolute;
-  left: 0;
-  color: var(--color-primary);
-}
 
-@media (max-width: 1100px) { .includes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .includes__grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .includes__grid { grid-template-columns: 1fr; } }
 
 /* ===== Section head ===== */
 .section-head { max-width: 640px; margin: 0 auto 56px; text-align: center; }
@@ -406,7 +362,7 @@ section { padding: 96px 0; }
   left: 50%;
   transform: translateX(-50%);
   background: var(--color-accent);
-  color: #fff;
+  color: #33322c; /* fixo (não var(--color-text)): o fundo dourado não muda no dark mode, então o texto também não pode mudar sem perder contraste */
   font-size: 0.74rem;
   font-weight: 700;
   padding: 6px 18px;
@@ -415,8 +371,6 @@ section { padding: 96px 0; }
   white-space: nowrap;
 }
 
-@media (max-width: 1100px) { .services__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .services__grid { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .services__grid--3 { grid-template-columns: 1fr; } }
 
 .services__payment {
@@ -455,20 +409,6 @@ section { padding: 96px 0; }
   padding: 6px 14px;
   text-align: center;
 }
-.whatsapp-mock__header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  background: var(--color-primary-dark);
-}
-.whatsapp-mock__avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.whatsapp-mock__name { color: #fff; font-weight: 700; font-size: 0.88rem; }
 .whatsapp-mock__body {
   background: #e5efdb;
   padding: 20px 16px;
@@ -479,25 +419,6 @@ section { padding: 96px 0; }
 }
 .whatsapp-mock__body--photo { background: var(--color-bg); padding: 0; }
 .whatsapp-mock__screenshot { display: block; width: 100%; height: auto; }
-.whatsapp-mock__bubble {
-  background: #fff;
-  border-radius: 0 10px 10px 10px;
-  padding: 12px 14px;
-  max-width: 100%;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-@media (prefers-color-scheme: dark) {
-  .whatsapp-mock__bubble { background: #2a2f23; }
-}
-.whatsapp-mock__bubble p { color: var(--color-text); font-size: 0.9rem; margin-bottom: 8px; }
-.whatsapp-mock__meta {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-  color: var(--color-text-muted);
-  font-size: 0.72rem;
-}
 
 @media (max-width: 900px) { .testimonials__grid { grid-template-columns: 1fr; } }
 
@@ -561,7 +482,6 @@ section { padding: 96px 0; }
 }
 .footer__brand .logo { font-size: 1.2rem; }
 .footer__brand p { color: var(--color-text-muted); font-size: 0.88rem; margin-top: 6px; }
-.footer__crn { font-style: italic; font-size: 0.8rem; }
 .footer__links { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
 .footer__links a { color: var(--color-text-muted); font-size: 0.9rem; font-weight: 600; transition: color 0.2s ease; }
 .footer__links a:hover { color: var(--color-primary-dark); }
@@ -595,3 +515,18 @@ section { padding: 96px 0; }
   transition: transform 0.2s ease;
 }
 .whatsapp-float:hover { transform: scale(1.08); }
+
+/* ===== Dark mode: contraste de texto sobre superfícies escuras =====
+   --color-primary-dark não muda entre os modos (é cor de identidade), mas o fundo
+   por trás desses textos escurece no dark mode — sem isso o contraste fica abaixo
+   do mínimo de acessibilidade (WCAG AA). */
+@media (prefers-color-scheme: dark) {
+  .eyebrow, .tag, .whatsapp-mock__example { color: var(--color-text-muted); }
+}
+
+/* ===== Movimento reduzido ===== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
