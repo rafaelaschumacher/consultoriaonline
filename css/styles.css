@@ -63,6 +63,18 @@ em { font-style: italic; font-weight: 600; color: var(--color-primary-dark); }
 section { padding: 96px 0; }
 @media (max-width: 768px) { section { padding: 64px 0; } }
 
+/* ===== Foco visível (navegação por teclado) ===== */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-primary-dark);
+  outline-offset: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  a:focus-visible, button:focus-visible { outline-color: var(--color-accent); }
+}
+/* .who e .final-cta têm fundo verde-escuro fixo (não muda com o modo),
+   então o outline também precisa ficar fixo em vez de seguir o modo. */
+.who :focus-visible, .final-cta :focus-visible { outline-color: #fff; }
+
 /* ===== Buttons ===== */
 .btn {
   display: inline-flex;
@@ -511,4 +523,11 @@ section { padding: 96px 0; }
    do mínimo de acessibilidade (WCAG AA). */
 @media (prefers-color-scheme: dark) {
   .eyebrow, .tag, .whatsapp-mock__example { color: var(--color-text-muted); }
+}
+
+/* ===== Movimento reduzido ===== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
