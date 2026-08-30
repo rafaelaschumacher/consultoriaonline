@@ -111,15 +111,6 @@ técnica pode ser diferente. Nesse caso:
   ela pode ser copiada para lá em `.claude/skills/rafaela-brand/` — o conteúdo já foi
   escrito para não depender de nada específico deste repositório.
 
-## Inconsistência conhecida — não copiar
-
-`assets/favicon.svg` usa uma paleta azul (`#2f6690` / `#4f9bd1`) e a fonte "Poppins",
-que **não correspondem** aos tokens reais da marca (verde-sálvia/dourado, Plus Jakarta
-Sans). Isso é um resíduo de uma versão anterior do site, não uma segunda fonte de
-verdade. **Nunca use as cores ou a fonte do favicon como referência de marca** — nem
-neste projeto, nem no novo. Se o usuário pedir para corrigir o favicon, isso é bem-vindo,
-mas é uma correção pontual, não uma mudança de token.
-
 ## Decisões em aberto (camada D)
 
 Estas partes do design system **ainda não têm um valor oficial**. Elas existem hoje no

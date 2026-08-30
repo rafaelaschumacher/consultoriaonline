@@ -237,8 +237,7 @@ section { padding: 96px 0; }
   margin: 0 auto;
   box-shadow: var(--shadow-md);
 }
-.about__content h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); margin-bottom: 6px; }
-.crn-note { color: var(--color-text-muted); font-size: 0.85rem; font-style: italic; margin-bottom: 16px; }
+.about__content h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); margin-bottom: 12px; }
 .about__content p { color: var(--color-text-muted); margin-bottom: 16px; }
 .about__tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
 .tag {
@@ -472,7 +471,6 @@ section { padding: 96px 0; }
 }
 .footer__brand .logo { font-size: 1.2rem; }
 .footer__brand p { color: var(--color-text-muted); font-size: 0.88rem; margin-top: 6px; }
-.footer__crn { font-style: italic; font-size: 0.8rem; }
 .footer__links { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
 .footer__links a { color: var(--color-text-muted); font-size: 0.9rem; font-weight: 600; transition: color 0.2s ease; }
 .footer__links a:hover { color: var(--color-primary-dark); }
