@@ -63,10 +63,11 @@ secundárias — não crie uma terceira variante de cor sem necessidade real.
 ## Wordmark — `.logo` — *Camada A*
 
 Definição: linha ~93. Não é um "componente" no sentido de peça de UI reaproveitável em
-vários contextos — é a própria forma de escrever o nome da marca: `font-heading`,
-`font-weight: 800`, `color: var(--color-primary-dark)`. Tratar como parte da identidade
-(camada A): reproduzir exatamente essa combinação sempre que o nome da marca aparecer
-como wordmark, tanto no header quanto no footer.
+vários contextos — é a própria forma de escrever o nome da marca: `font-heading`
+(Playfair Display), `font-weight: 600`, `letter-spacing: 0.01em`,
+`color: var(--color-primary-dark)`. Tratar como parte da identidade (camada A):
+reproduzir exatamente essa combinação sempre que o nome da marca aparecer como
+wordmark, tanto no header quanto no footer.
 
 ```html
 <a href="#topo" class="logo">Rafaela Schumacher</a>
