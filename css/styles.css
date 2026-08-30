@@ -433,6 +433,7 @@ section { padding: 96px 0; }
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
+  align-items: start;
 }
 .whatsapp-mock {
   background: var(--color-bg);
@@ -476,6 +477,8 @@ section { padding: 96px 0; }
 @media (prefers-color-scheme: dark) {
   .whatsapp-mock__body { background: #1f2a19; }
 }
+.whatsapp-mock__body--photo { background: var(--color-bg); padding: 0; }
+.whatsapp-mock__screenshot { display: block; width: 100%; height: auto; }
 .whatsapp-mock__bubble {
   background: #fff;
   border-radius: 0 10px 10px 10px;
