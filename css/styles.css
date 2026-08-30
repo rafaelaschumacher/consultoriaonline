@@ -180,10 +180,11 @@ section { padding: 96px 0; }
     gap: 26px;
     padding: 32px;
     box-shadow: var(--shadow-md);
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    clip-path: inset(0 0 0 100%);
+    visibility: hidden;
+    transition: clip-path 0.3s ease, visibility 0s linear 0.3s;
   }
-  .nav.is-open { transform: translateX(0); }
+  .nav.is-open { clip-path: inset(0 0 0 0%); visibility: visible; transition: clip-path 0.3s ease, visibility 0s; }
   .nav__cta { margin-left: 0; width: 100%; white-space: normal; text-align: center; line-height: 1.3; }
   .menu-toggle { display: flex; }
   .menu-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -350,7 +351,7 @@ section { padding: 96px 0; }
   left: 50%;
   transform: translateX(-50%);
   background: var(--color-accent);
-  color: #fff;
+  color: #33322c; /* fixo (não var(--color-text)): o fundo dourado não muda no dark mode, então o texto também não pode mudar sem perder contraste */
   font-size: 0.74rem;
   font-weight: 700;
   padding: 6px 18px;
@@ -359,8 +360,6 @@ section { padding: 96px 0; }
   white-space: nowrap;
 }
 
-@media (max-width: 1100px) { .services__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .services__grid { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .services__grid--3 { grid-template-columns: 1fr; } }
 
 .services__payment {
@@ -507,3 +506,11 @@ section { padding: 96px 0; }
   transition: transform 0.2s ease;
 }
 .whatsapp-float:hover { transform: scale(1.08); }
+
+/* ===== Dark mode: contraste de texto sobre superfícies escuras =====
+   --color-primary-dark não muda entre os modos (é cor de identidade), mas o fundo
+   por trás desses textos escurece no dark mode — sem isso o contraste fica abaixo
+   do mínimo de acessibilidade (WCAG AA). */
+@media (prefers-color-scheme: dark) {
+  .eyebrow, .tag, .whatsapp-mock__example { color: var(--color-text-muted); }
+}
