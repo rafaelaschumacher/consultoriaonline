@@ -200,45 +200,17 @@ section { padding: 96px 0; }
 
 /* ===== Hero ===== */
 .hero { padding-top: 64px; padding-bottom: 96px; overflow: hidden; }
-.hero__inner {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: center;
-}
+.hero__inner { display: flex; justify-content: center; text-align: center; }
+.hero__content { max-width: 720px; }
 .hero h1 {
   font-size: clamp(2rem, 3.6vw, 3.1rem);
-  margin-bottom: 22px;
-}
-.hero__text {
-  color: var(--color-text-muted);
-  font-size: 1.08rem;
-  max-width: 520px;
   margin-bottom: 32px;
 }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
-  margin-bottom: 24px;
-}
-.hero__discreet {
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-}
-.photo-placeholder--hero {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  box-shadow: var(--shadow-md);
-}
-
-@media (max-width: 900px) {
-  .hero__inner { grid-template-columns: 1fr; }
-  .hero__content { text-align: center; }
-  .eyebrow { justify-content: center; }
-  .hero__text { margin-left: auto; margin-right: auto; }
-  .hero__actions { justify-content: center; }
-  .photo-placeholder--hero { max-width: 360px; margin: 0 auto; aspect-ratio: 1 / 1; }
 }
 
 /* ===== About ===== */
@@ -287,29 +259,15 @@ section { padding: 96px 0; }
 .who { background: var(--color-primary-dark); color: #fff; }
 .who__inner { display: flex; justify-content: center; }
 .who__content { max-width: 640px; text-align: center; }
-.who__content h2 { color: #fff; font-size: clamp(1.6rem, 2.8vw, 2.1rem); margin-bottom: 28px; }
-.who__list { display: inline-block; text-align: left; }
-.who__list li {
-  position: relative;
-  padding-left: 28px;
-  margin-bottom: 14px;
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.94);
-}
-.who__list li::before {
-  content: "\2726";
-  position: absolute;
-  left: 0;
-  top: 0.05em;
-  color: var(--color-accent);
-  font-size: 0.85em;
-}
+.who__content h2 { color: #fff; font-size: clamp(1.6rem, 2.8vw, 2.1rem); }
 
 /* ===== O que você recebe ===== */
 .includes__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  max-width: 940px;
+  margin: 0 auto;
 }
 .includes__item {
   background: var(--color-bg-alt);
@@ -329,22 +287,8 @@ section { padding: 96px 0; }
   font-size: 0.85em;
 }
 .includes__item p { font-size: 0.88rem; color: var(--color-text-muted); }
-.includes__sublist li {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  padding-left: 14px;
-  position: relative;
-  margin-bottom: 4px;
-}
-.includes__sublist li::before {
-  content: "\2013";
-  position: absolute;
-  left: 0;
-  color: var(--color-primary);
-}
 
-@media (max-width: 1100px) { .includes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .includes__grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .includes__grid { grid-template-columns: 1fr; } }
 
 /* ===== Section head ===== */
 .section-head { max-width: 640px; margin: 0 auto 56px; text-align: center; }
@@ -454,20 +398,6 @@ section { padding: 96px 0; }
   padding: 6px 14px;
   text-align: center;
 }
-.whatsapp-mock__header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  background: var(--color-primary-dark);
-}
-.whatsapp-mock__avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.whatsapp-mock__name { color: #fff; font-weight: 700; font-size: 0.88rem; }
 .whatsapp-mock__body {
   background: #e5efdb;
   padding: 20px 16px;
@@ -476,24 +406,9 @@ section { padding: 96px 0; }
 @media (prefers-color-scheme: dark) {
   .whatsapp-mock__body { background: #1f2a19; }
 }
-.whatsapp-mock__bubble {
-  background: #fff;
-  border-radius: 0 10px 10px 10px;
-  padding: 12px 14px;
-  max-width: 100%;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-@media (prefers-color-scheme: dark) {
-  .whatsapp-mock__bubble { background: #2a2f23; }
-}
-.whatsapp-mock__bubble p { color: var(--color-text); font-size: 0.9rem; margin-bottom: 8px; }
-.whatsapp-mock__meta {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-  color: var(--color-text-muted);
-  font-size: 0.72rem;
+.whatsapp-mock__placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
 }
 
 @media (max-width: 900px) { .testimonials__grid { grid-template-columns: 1fr; } }
