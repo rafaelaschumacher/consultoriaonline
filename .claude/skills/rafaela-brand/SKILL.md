@@ -18,6 +18,14 @@ identidade que já existe no código do site atual. Nenhum valor aqui foi invent
 ajustado; onde algo ainda não está decidido, isso é declarado explicitamente na seção
 "Decisões em aberto" em vez de ser preenchido com um palpite.
 
+> **Versão atual da identidade: bronze e creme (aprovada pela usuária em 2026-08-31).**
+> Paleta em família quente única (creme `#fefcf9` → bronze `#9c8362` → espresso
+> `#241d17`), tipografia serifada de traço fino (Cormorant Garamond 300) com sans leve no
+> corpo (Jost 300), filete horizontal no lugar do glifo ✦ e assinatura do nome em duas
+> tipografias. Isso **substituiu integralmente** a identidade anterior (verde-sálvia
+> `#7c8f6a` + dourado `#c8a24d`, Playfair Display + Plus Jakarta Sans, motivo ✦) — se
+> você encontrar aqueles valores em algum projeto da marca, é resíduo e deve ser migrado.
+
 ## Regra central
 
 > **Quando existir um padrão visual no design system, reutilizá-lo. Não criar uma nova
@@ -60,7 +68,7 @@ que é específico deste site:
 
 | Camada | O que é | Deve ir para o segundo projeto? |
 |---|---|---|
-| **A — Identidade da marca** | Cores, família tipográfica, o motivo de "grifo" com `<em>`, o motivo sparkle (✦). O que torna algo "visualmente a marca Rafaela Schumacher", independente de onde aparece. | Sim, sempre — sem alterar valores. |
+| **A — Identidade da marca** | Cores, família tipográfica e seu peso leve, o motivo de "grifo" com `<em>`, o motivo do filete horizontal, a assinatura do nome em duas tipografias, o rótulo em caixa alta com entreletra larga. O que torna algo "visualmente a marca Rafaela Schumacher", independente de onde aparece. | Sim, sempre — sem alterar valores. |
 | **B — Componentes reutilizáveis** | Peças de UI genéricas construídas com os tokens da camada A: botões, tags, cabeçalho de seção, card, accordion, avatar, placeholder, animação de entrada. | Sim, como padrão/estrutura — a marcação HTML/CSS exata pode se adaptar à stack nova, mas a forma e o comportamento devem ser os mesmos. |
 | **C — Padrões específicos deste site** | Composições de página e componentes ligados ao conteúdo/funcionalidade deste site de consultoria (navegação, mockup de WhatsApp, botão flutuante de WhatsApp, grid do Instagram, layout de cada seção da home). | Não necessariamente — são decisões de produto deste site, não da marca. Avaliar caso a caso. |
 | **D — Decisões ainda não definidas** | Lacunas do design system que ainda não têm um valor oficial (ver seção abaixo). | Não usar até serem definidas — perguntar ao usuário. |
@@ -126,15 +134,18 @@ para "oficial").
 - **Escala de espaçamento** — não existe um conjunto de valores nomeados (ex: 4/8/16/24)
   para `gap`/`padding`/`margin`; o site atual usa valores ad hoc.
 - **Motion tokens** — não existem durações/easings nomeados; o site atual usa
-  `0.2s`/`0.25s`/`0.3s`/`0.6s ease` sem critério documentado de quando usar cada um.
+  `0.2s`/`0.25s`/`0.3s`/`0.7s ease` sem critério documentado de quando usar cada um.
 - **Escala de z-index** — não existe uma ordem de empilhamento documentada; o site atual
-  só tem dois valores soltos (`90` e `100`).
+  só tem valores soltos (`90`, `95` e `100`).
 - **Sistema de ícones** — não existe uma definição de qual conjunto de ícones usar, nem
-  regra de tamanho/cor; o site atual mistura glifos unicode com SVGs inline ad hoc.
-- **Estados de foco, erro e desabilitado** — não existem definidos em lugar nenhum do
-  CSS atual (nenhuma regra `:focus`/`:focus-visible`, nenhum estado de erro de
-  formulário, nenhum estado desabilitado de botão). Isso é especialmente relevante para
-  a plataforma de pacientes, que provavelmente terá formulários e login.
+  regra de tamanho/cor; o site atual usa apenas SVGs inline ad hoc (o glifo ✦ da
+  identidade anterior foi aposentado em favor do filete).
+- **Estados de erro e desabilitado** — não existem definidos em lugar nenhum do CSS atual
+  (nenhum estado de erro de formulário, nenhum estado desabilitado de botão). Isso é
+  especialmente relevante para a plataforma de pacientes, que provavelmente terá
+  formulários e login. O estado de **foco** já existe e é oficial: `outline: 2px solid
+  var(--color-primary)` com `outline-offset: 2px`, virando branco dentro das seções
+  escuras.
 
 ## Referências
 

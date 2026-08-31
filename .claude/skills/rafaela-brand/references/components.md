@@ -22,12 +22,13 @@ componente existente em vez de recriar.
 | Componente | Classe(s) | Camada |
 |---|---|---|
 | Botão | `.btn`, `.btn--primary`, `.btn--outline`, `.btn--sm` | B |
-| Wordmark/logo | `.logo` | A (identidade, não um componente de UI) |
-| Eyebrow + sparkle | `.eyebrow`, `.eyebrow--light`, `.sparkle` | B |
+| Assinatura do nome | `.logo`, `.logo__last` | A (identidade, não um componente de UI) |
+| Eyebrow + filete | `.eyebrow`, `.eyebrow--light`, `.sparkle` | B |
 | Cabeçalho de seção | `.section-head` | B |
 | Tag | `.tag` | B |
 | Card de plano | `.plan-card`, `.plan-card--highlight`, `.plan-card__badge` | B (padrão de card) / C (conteúdo "planos") |
 | FAQ accordion | `.faq__item`, `.faq__question`, `.faq__answer` | B |
+| Retrato em painel | `.about-photo` | B |
 | Avatar com iniciais | `.avatar-circle` | B |
 | Placeholder de mídia | `.photo-placeholder`, `.photo-placeholder--hero` | B |
 | Animação de entrada | `[data-reveal]` | B |
@@ -40,69 +41,85 @@ componente existente em vez de recriar.
 
 ## Botões — `.btn` — *Camada B*
 
-Definição: `css/styles.css` (bloco "Buttons", por volta da linha 66).
+Definição: `css/styles.css` (bloco "Buttons").
+
+Todo botão é pill (`border-radius: 999px`) e usa o **rótulo em caixa alta** da marca:
+`text-transform: uppercase`, `letter-spacing: 0.14em`, `font-size: 0.74rem`,
+`font-weight: 500` (ver `tokens.md` → "Rótulo em caixa alta"). O texto do botão nunca é
+caixa baixa.
 
 Variantes:
-- `.btn--primary` — fundo `--color-primary`, texto branco, sombra `--shadow-sm`; hover
-  escurece para `--color-primary-dark` e sobe (`translateY(-2px)`) com `--shadow-md`.
-- `.btn--outline` — transparente, borda `1.5px solid var(--color-primary)`, texto
-  `--color-primary-dark`; hover preenche com `--color-primary-light`.
-- `.btn--sm` — padding reduzido, usado no CTA da navbar.
-
-Formato sempre pill (`border-radius: 999px`), `font-weight: 700`.
+- `.btn--primary` — **degradê bronze** `linear-gradient(135deg, #b09775 0%, #8a7050 100%)`,
+  texto `#fff` (fixo, porque o degradê não muda no dark mode), sombra `--shadow-sm`; no
+  hover o degradê escurece e o botão sobe (`translateY(-2px)`) com `--shadow-md`.
+- `.btn--outline` — transparente, borda `1px solid var(--color-accent)`, texto
+  `--color-text`; hover preenche com `--color-primary-light` e a borda passa a
+  `--color-primary`.
+- `.btn--sm` — padding e corpo reduzidos (`0.68rem`), usado no CTA da navbar.
 
 ```html
 <a href="..." class="btn btn--primary">Quero começar agora</a>
-<a href="..." class="btn btn--outline">Seguir @rafaschumacherr</a>
+<a href="..." class="btn btn--outline">Quero essa consulta</a>
 <a href="..." class="btn btn--primary btn--sm nav__cta">Quero começar</a>
 ```
 
 Use `.btn--primary` para a ação principal de uma seção e `.btn--outline` para ações
-secundárias — não crie uma terceira variante de cor sem necessidade real.
+secundárias — não crie uma terceira variante de cor sem necessidade real. Sobre fundo
+escuro (`.final-cta`), o `.btn--primary` inverte para fundo branco com texto
+`--color-deep`.
 
-## Wordmark — `.logo` — *Camada A*
+## Assinatura do nome — `.logo` + `.logo__last` — *Camada A*
 
-Definição: linha ~93. Não é um "componente" no sentido de peça de UI reaproveitável em
-vários contextos — é a própria forma de escrever o nome da marca: `font-heading`
-(Playfair Display), `font-weight: 600`, `letter-spacing: 0.01em`,
-`color: var(--color-primary-dark)`. Tratar como parte da identidade (camada A):
-reproduzir exatamente essa combinação sempre que o nome da marca aparecer como
-wordmark, tanto no header quanto no footer.
+Não é um "componente" no sentido de peça de UI reaproveitável — é a própria forma de
+escrever o nome da marca, composta por **duas tipografias na mesma linha**: nome em sans
+encorpada, sobrenome em serifada itálica bronze. Por isso o sobrenome precisa vir dentro
+de um `<span class="logo__last">` (ver `tokens.md` → "Assinatura do nome").
 
 ```html
-<a href="#topo" class="logo">Rafaela Schumacher</a>
+<a href="#topo" class="logo">Rafaela <span class="logo__last">Schumacher</span></a>
+<span class="logo">Rafaela <span class="logo__last">Schumacher</span></span>
 ```
+
+`1.42rem` no header, `1.32rem` no rodapé, `white-space: nowrap` nos dois. Reproduzir
+exatamente essa composição sempre que o nome aparecer como marca — inclusive na
+plataforma de pacientes.
 
 ## Eyebrow (rótulo de categoria) — `.eyebrow` — *Camada B*
 
-Definição: linha ~109. Rótulo uppercase acima de um `h2`, com o glifo sparkle (✦,
-`&#10022;` / `\2726`) à esquerda — é o motivo visual mais recorrente da marca (ver
-também `patterns.md`).
+Rótulo uppercase acima de um `h2`, com um **filete horizontal** de `30px × 1px` na cor
+`--color-accent` à esquerda, separado por `gap: 14px`. O filete é o motivo visual mais
+recorrente da marca (ver `patterns.md`).
+
+O filete é desenhado pela própria classe `.sparkle`: o glifo ✦ que ela continha na
+identidade anterior foi aposentado, e a classe hoje zera o texto (`font-size: 0`) e vira
+um retângulo. O `<span class="sparkle">` no HTML é mantido só como suporte do filete —
+não voltar a renderizar um glifo dentro dele.
 
 ```html
-<span class="eyebrow"><span class="sparkle">&#10022;</span> Sobre mim</span>
+<span class="eyebrow"><span class="sparkle" aria-hidden="true">&#10022;</span> Planos</span>
 ```
 
 Variante `.eyebrow--light` para uso sobre fundos escuros (ex: seção `.who`).
 
 ## Cabeçalho de seção — `.section-head` — *Camada B*
 
-Definição: linha ~350. Combina eyebrow + `h2` + parágrafo, centralizado, largura
-máxima 640px. É o padrão de abertura de praticamente toda seção de conteúdo
-(`.includes`, `.services`, `.testimonials`, `.instagram`, `.faq`).
+Combina eyebrow + `h2` + parágrafo opcional, centralizado, largura máxima `680px` e
+`margin-bottom: 64px`. É o padrão de abertura de praticamente toda seção de conteúdo
+(`.includes`, `.services`, `.testimonials`, `.faq`).
 
 ```html
 <div class="section-head" data-reveal>
-  <span class="eyebrow"><span class="sparkle">&#10022;</span> Planos</span>
+  <span class="eyebrow"><span class="sparkle" aria-hidden="true">&#10022;</span> Planos</span>
   <h2>Escolha o plano que faz sentido para você</h2>
 </div>
 ```
 
 ## Tag — `.tag` — *Camada B*
 
-Definição: linha ~271. Pill pequena para característica/especialidade (usado em
-`.about__tags`). Fundo `--color-bg`, borda `--color-border`, texto
-`--color-primary-dark`.
+Pill pequena para característica/especialidade (usada em `.about__tags`). Fundo
+transparente, borda `1px solid var(--color-border)`, texto `--color-text-muted` no
+tratamento de rótulo em caixa alta (`0.68rem`, `letter-spacing: 0.12em`). Sem
+preenchimento sólido — o contorno fino é que dá o tom.
 
 ```html
 <span class="tag">Nutrição esportiva</span>
@@ -110,19 +127,23 @@ Definição: linha ~271. Pill pequena para característica/especialidade (usado 
 
 ## Card de plano — `.plan-card` — *Camada B (padrão de card) / C (conteúdo "planos")*
 
-Definição: linha ~367. O **padrão estrutural** (card com borda, sombra, estado de
-destaque, badge, lista, CTA no rodapé) é um componente genérico de marca — reaproveitável
-sempre que houver "opções para escolher" (planos, produtos, pacotes), inclusive na
-plataforma de pacientes se ela tiver algo equivalente. O **conteúdo específico** (nomes
-dos planos de nutrição, preços) é deste site.
+O **padrão estrutural** (card com borda, sombra, estado de destaque, badge, lista, CTA no
+rodapé) é um componente genérico de marca — reaproveitável sempre que houver "opções para
+escolher" (planos, produtos, pacotes), inclusive na plataforma de pacientes se ela tiver
+algo equivalente. O **conteúdo específico** (nomes dos planos de nutrição) é deste site.
 
-- `.plan-card--highlight` — borda `--color-accent`, fundo `--color-bg` (ao invés de
-  `--color-bg-alt`), usado para o plano "mais escolhido".
-- `.plan-card__badge` — selo flutuante no topo do card (ex: "Mais escolhido"), fundo
-  `--color-accent`.
-- `.plan-card__list` — lista de itens do plano, com bullet sparkle (mesmo motivo do
-  `.eyebrow`).
-- `.plan-card__cta` — botão de ação do card, sempre `width: 100%`.
+Base: fundo `--color-surface`, borda `1px solid var(--color-border)`,
+`border-radius: var(--radius-lg)`, `padding: 44px 34px`, `--shadow-sm`.
+
+- `.plan-card--highlight` — borda `1px solid var(--color-accent)` e `--shadow-md` (em vez
+  de `--shadow-sm`), usado para o plano "mais escolhido". O destaque vem da borda bronze e
+  da sombra mais presente, não de um fundo diferente.
+- `.plan-card__badge` — selo flutuante no topo do card (ex: "Mais escolhido"), com o
+  degradê bronze oficial e texto `#fff` em caixa alta (`0.64rem`, `letter-spacing: 0.16em`).
+- `.plan-card__list` — lista de itens do plano, com bullet em filete de `14px × 1px`
+  (mesmo motivo do `.eyebrow`).
+- `.plan-card__cta` — botão de ação do card, sempre `width: 100%`, com entreletra
+  levemente reduzida (`0.1em`) para o rótulo caber numa linha só.
 
 ```html
 <article class="plan-card plan-card--highlight" data-reveal>
@@ -137,10 +158,12 @@ dos planos de nutrição, preços) é deste site.
 
 ## FAQ accordion — `.faq__item` — *Camada B*
 
-Definição CSS: linha ~514. Comportamento (abrir/fechar, `aria-expanded`, animação de
-`max-height`): `js/main.js`, bloco "FAQ accordion". Reutilize esse padrão (HTML +
-comportamento) para qualquer lista de perguntas/respostas expansível — inclusive uma
-seção de ajuda/FAQ na plataforma de pacientes.
+Comportamento (abrir/fechar, `aria-expanded`, animação de `max-height`): `js/main.js`,
+bloco "FAQ accordion". A pergunta usa `--font-heading` em `400`/`1.3rem` — serifada e
+leve, como os títulos; o ícone `+` é `--color-accent` e gira 45° quando aberto. Os itens
+são separados só por uma linha de `1px` (`--color-border`), sem card nem fundo.
+Reutilize esse padrão (HTML + comportamento) para qualquer lista de perguntas/respostas
+expansível — inclusive uma seção de ajuda/FAQ na plataforma de pacientes.
 
 ```html
 <div class="faq__item">
@@ -154,26 +177,36 @@ seção de ajuda/FAQ na plataforma de pacientes.
 </div>
 ```
 
+## Retrato em painel — `.about-photo` — *Camada B*
+
+Foto real num painel retangular vertical: `aspect-ratio: 4 / 5`, `object-fit: cover`,
+`object-position: 50% 20%` (enquadra o rosto, não o centro geométrico),
+`border-radius: var(--radius-lg)` e `--shadow-md`. É o formato oficial para foto de
+pessoa na marca — retangular alto com cantos arredondados, nunca recortada em círculo.
+
+```html
+<img class="about-photo" src="assets/sobre-mim.jpg" alt="Rafaela Schumacher treinando na academia">
+```
+
 ## Avatar / placeholder de foto — *Camada B*
 
-- `.avatar-circle` (linha ~252) — círculo com iniciais sobre gradiente
-  `linear-gradient(135deg, var(--color-primary), var(--color-accent))`. Usado em
-  "Sobre mim", hoje fixo com o texto "RS". O padrão (círculo com gradiente de marca +
-  iniciais) é reutilizável como avatar genérico.
-- `.photo-placeholder` / `.photo-placeholder--hero` (linha ~194) — retângulo com o
-  mesmo gradiente a 35% de opacidade, para onde fotos reais entrarão depois. Ao trocar
-  por uma foto real, remover a classe `.photo-placeholder` e manter só o container.
+- `.avatar-circle` — círculo com iniciais sobre o degradê bronze oficial
+  (`#b09775 → #8a7050`), `--font-heading` peso 300. Não está em uso na home hoje (a seção
+  Sobre passou a usar `.about-photo`), mas continua sendo o padrão de avatar genérico
+  para quando fizer falta — por exemplo, o avatar de um paciente na plataforma.
+- `.photo-placeholder` / `.photo-placeholder--hero` — retângulo com o mesmo degradê a 30%
+  de opacidade, para onde fotos reais entrarão depois. Ao trocar por uma foto real,
+  remover a classe `.photo-placeholder` e manter só o container.
 
 ## Monograma "RS" (favicon) — `assets/favicon.svg` — *Camada A*
 
-Círculo sólido `--color-primary-dark` (`#4f5d3f`), iniciais "RS" em Playfair Display
-peso 900 (black), cor `--color-bg` (`#fdfbf6`), sem gradiente e sem anel/borda. É uma
-versão simplificada do monograma em anel fino de um sistema de marca mais amplo
-(logo + paleta) fornecido pela usuária em 2026-08-31 — o anel de 1px e o peso regular
-da Playfair não seguram a leitura em tamanho real de favicon (16–32px, testado);
-peso 900 + sem anel continua legível nesse tamanho. Se um monograma "RS" for
-necessário em outro contexto (não-favicon, com mais espaço), reavaliar se o anel fino
-original do sistema de marca é aplicável ali, em vez de reusar esta versão simplificada.
+Círculo sólido `--color-deep` (`#241d17`), iniciais "RS" em serifada peso 900 (black),
+cor `--color-bg` (`#fefcf9`), sem gradiente e sem anel/borda. O peso 900 é deliberado e
+é a única exceção à regra de "traço fino" da marca: em tamanho real de favicon (16–32px,
+testado) o traço leve da serifada não sustenta a leitura, e o anel fino do monograma
+original desaparece. Se um monograma "RS" for necessário em outro contexto (não-favicon,
+com mais espaço), reavaliar se o anel fino original do sistema de marca é aplicável ali,
+em vez de reusar esta versão simplificada.
 
 ## Animação de entrada — `[data-reveal]` — *Camada B*
 
@@ -193,39 +226,45 @@ portar para a plataforma de pacientes, caso ela também use reveal-on-scroll.
 
 ## Header / navegação — `.header`, `.nav` — *Camada C*
 
-Definição: linha ~123 (`css/styles.css`); comportamento do menu mobile em `js/main.js`.
-Cabeçalho fixo (`position: sticky`) com blur de fundo, links de navegação específicos
-deste site (Sobre, Para você, Consulta, Planos, Depoimentos, Contato) e um CTA de WhatsApp.
+Comportamento do menu mobile em `js/main.js`. Cabeçalho fixo (`position: sticky`) com
+blur de fundo, links de navegação específicos deste site (Sobre, Para você, O que inclui,
+Planos, Depoimentos, Contato) e um CTA de WhatsApp. Os links usam o rótulo em caixa alta
+(`0.72rem`, `letter-spacing: 0.16em`) e `white-space: nowrap`; a assinatura tem
+`flex-shrink: 0` — sem esses dois, o header quebra em duas linhas em telas médias.
 Construído com componentes da camada B (`.logo`, `.btn`), mas a composição/itens do menu
 são deste site — não portar a lista de links, só o padrão de "header sticky com blur +
 menu mobile", se fizer sentido no app de pacientes.
 
-## Mockup de conversa WhatsApp — `.whatsapp-mock` — *Camada C*
+## Card de depoimento (print de WhatsApp) — `.whatsapp-mock` — *Camada C*
 
-Definição: linha ~437. Simula um print de conversa de WhatsApp para depoimentos. Usa
-cores fixas do WhatsApp (ver `tokens.md` → "Exceções propositais"), não os tokens de
-marca — específico deste formato de depoimento, não um componente de marca genérico.
+Card que exibe um print real de conversa de WhatsApp como depoimento. Diferente da
+identidade anterior (que simulava a UI do WhatsApp inteira), hoje o card é **da marca**:
+a barra do cabeçalho usa o degradê bronze oficial, com o nome em rótulo caixa alta
+(`0.68rem`, `letter-spacing: 0.18em`) e um ponto translúcido no lugar do avatar.
+
+- `.whatsapp-mock__body--photo` — painel do print: altura fixa de `340px` no desktop
+  (`auto` abaixo de `900px`), fundo `#f6f2ea` e a imagem em `object-fit: contain` com
+  `object-position: top`. É isso que deixa todos os cards do mesmo tamanho e alinhados
+  sem cortar o texto do print.
+- `.whatsapp-mock__body` — variante de bolha de texto, com o fundo de chat do WhatsApp
+  (ver `tokens.md` → "Exceções propositais"). Não está em uso hoje.
 
 ```html
 <article class="whatsapp-mock" data-reveal>
   <div class="whatsapp-mock__header">
     <div class="whatsapp-mock__avatar photo-placeholder"></div>
-    <span class="whatsapp-mock__name">Paciente M.</span>
+    <span class="whatsapp-mock__name">Paciente.</span>
   </div>
-  <div class="whatsapp-mock__body">
-    <div class="whatsapp-mock__bubble">
-      <p>Texto do depoimento...</p>
-      <span class="whatsapp-mock__meta">09:42</span>
-    </div>
+  <div class="whatsapp-mock__body whatsapp-mock__body--photo">
+    <img src="assets/testimonials/depoimento-1.jpg" alt="Print de conversa no WhatsApp: ..." class="whatsapp-mock__screenshot" loading="lazy">
   </div>
 </article>
 ```
 
 ## Botão flutuante de WhatsApp — `.whatsapp-float` — *Camada C*
 
-Definição: linha ~591. Botão fixo no canto inferior direito, cor fixa
-`#25d366` (verde oficial do WhatsApp, não um token de marca). Específico do canal de
-contato deste site.
+Botão fixo no canto inferior direito, cor fixa `#25d366` (verde oficial do WhatsApp, não
+um token de marca). Específico do canal de contato deste site.
 
 ## Composição das seções da home — *Camada C*
 

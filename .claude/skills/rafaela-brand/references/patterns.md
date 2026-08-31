@@ -17,19 +17,24 @@ padrão — inclusive na plataforma de pacientes, se ela usar CSS por classe.
 O modo escuro é acionado **apenas** por `prefers-color-scheme: dark` (preferência do
 sistema operacional do visitante) — não existe toggle manual nem classe `.dark` no
 código atual. Dentro do dark mode, só os tokens de **superfície** mudam:
-`--color-bg`, `--color-bg-alt`, `--color-text`, `--color-text-muted`, `--color-border`,
-`--color-primary-light`. As cores de identidade (`--color-primary`, `--color-primary-dark`,
-`--color-accent`) permanecem as mesmas nos dois modos — é essa combinação (superfícies
-mudam, identidade não muda) que faz o dark mode "continuar parecendo a marca". Qualquer
-novo componente/seção deve seguir essa mesma regra: nunca redefinir a cor de identidade
-dentro de um bloco de dark mode.
+`--color-bg`, `--color-bg-alt`, `--color-surface`, `--color-text`, `--color-text-muted`,
+`--color-border`, `--color-primary-light`. As cores de identidade (`--color-primary`,
+`--color-primary-dark`, `--color-accent`, `--color-deep`) permanecem as mesmas nos dois
+modos — é essa combinação (superfícies mudam, identidade não muda) que faz o dark mode
+"continuar parecendo a marca". Qualquer novo componente/seção deve seguir essa mesma
+regra: nunca redefinir a cor de identidade dentro de um bloco de dark mode.
+
+Duas consequências práticas dessa regra, já aplicadas no CSS: o degradê bronze dos botões
+e selos é o mesmo nos dois modos, então o texto sobre ele fica fixo em `#fff` (não
+`var(--color-text)`); e as seções `.who`/`.final-cta` têm fundo escuro nos dois modos,
+então o `outline` de foco dentro delas fica fixo em branco.
 
 ## Ritmo vertical de seção — *Camada B*
 
-Toda `<section>` de conteúdo usa o mesmo padding vertical: `96px 0` no desktop,
-reduzindo para `64px 0` a partir de `768px` (ver `tokens.md` → Layout). Nenhuma seção do
+Toda `<section>` de conteúdo usa o mesmo padding vertical: `104px 0` no desktop,
+reduzindo para `68px 0` a partir de `768px` (ver `tokens.md` → Layout). Nenhuma seção do
 site foge desse ritmo. Uma seção nova deve usar o mesmo valor em vez de um padding
-arbitrário.
+arbitrário — o respiro generoso é parte do que dá o tom premium à marca.
 
 ## Container e grid de página — *Camada B*
 
@@ -38,35 +43,48 @@ Todo o conteúdo de cada seção fica dentro de `.container` (`max-width: 1140px
 dependendo da seção, sempre colapsando para menos colunas nos breakpoints já
 documentados em `tokens.md` (nunca um breakpoint novo só para uma grade específica).
 
-## Motivo de bullets customizados — *Camada A (o motivo) / B (a regra de uso)*
+## Filete como marcador — *Camada A (o motivo) / B (a regra de uso)*
 
-Duas marcas visuais recorrentes usadas em `::before` de itens de lista:
-- **Sparkle** `\2726` (✦), cor `--color-accent` — usado em `.who__list li`,
-  `.includes__item h3`, `.plan-card__list li`, e no próprio `.eyebrow`. É o "selo"
-  visual da marca, reservado para destacar um item de primeiro nível/importante.
-- **Dash** `\2013` (–), cor `--color-primary` — usado em `.includes__sublist li`,
-  reservado para itens secundários/sub-lista, dentro de um item que já usa sparkle.
+O motivo visual recorrente da marca é um **filete horizontal**: um retângulo de `1px` de
+altura na cor `--color-accent`, desenhado com `::before` (ou, no eyebrow, pelo próprio
+`.sparkle` esvaziado de texto). Ele aparece em três comprimentos, sempre pela mesma
+lógica — quanto mais importante o rótulo, mais longo o filete:
 
-Regra de uso observada no código: sparkle marca o item principal de uma lista; dash
-marca uma sub-lista dentro dele. Ao criar uma lista nova, escolher entre esses dois
-padrões conforme o nível hierárquico do item — não introduzir um terceiro glifo/estilo
-de marcador.
+| Onde | Comprimento | Observação |
+|---|---|---|
+| `.eyebrow` (rótulo de seção) | `30px` | Separado do texto por `gap: 14px`. |
+| `.includes__item p::before` | `16px` | `top: 0.72em` para alinhar com a primeira linha. |
+| `.plan-card__list li::before` | `14px` | `top: 0.85em`, `padding-left: 26px` no item. |
+
+Este motivo **substituiu o glifo ✦ (sparkle)** da identidade anterior. A classe
+`.sparkle` continua existindo no HTML por compatibilidade, mas hoje é estilizada como
+filete (`font-size: 0`, dimensões fixas) — ela não deve voltar a renderizar um glifo. Ao
+criar uma lista ou rótulo novo, use o filete em vez de introduzir um bullet redondo, um
+ícone ou um glifo unicode.
 
 ## Ênfase com `<em>` — *Camada A*
 
 `<em>` não é itálico genérico — é o "grifo de marca": `font-style: italic`,
-`font-weight: 600`, `color: var(--color-primary-dark)`. Usado para destacar uma
-palavra-chave dentro de um título ou frase (ex.: "caiba na *sua vida*",
+`font-weight: 400`, `color: var(--color-primary)`. O peso **não** é maior que o do texto
+ao redor: o destaque vem do itálico serifado e da cor bronze, não de negrito. Usado para
+destacar uma palavra-chave dentro de um título ou frase (ex.: "caiba na *sua rotina*",
 "Acompanhamento *Trimestral*"). É o único mecanismo de ênfase textual usado no site —
 não existe, por exemplo, um padrão de texto em negrito colorido ou sublinhado para o
 mesmo propósito. Reutilizar `<em>` para qualquer nova ênfase textual, nos dois projetos.
+
+## Contraste por peso, não por engrossamento — *Camada A*
+
+A hierarquia da página é construída com **tamanho, respiro e cor**, nunca engrossando a
+fonte. Títulos ficam em `300`, corpo em `300`, e o único peso alto do site é o `600` do
+nome na assinatura. Se um elemento novo parece "sumir", aumente o tamanho, o espaço em
+volta ou troque para itálico bronze — não suba o `font-weight`.
 
 ## Hover / elevação — *Camada B*
 
 Padrão recorrente em elementos interativos: no hover, o elemento sobe
 (`transform: translateY(-2px)` em botões, `translateY(-6px)` em `.plan-card`) e a
 sombra escala de `--shadow-sm` para `--shadow-md`. Links de texto simples (`.nav__link`,
-`.footer__links a`) não sobem — só mudam de cor para `--color-primary-dark`. Ou seja,
+`.footer__links a`) não sobem — só mudam de cor para `--color-primary`. Ou seja,
 existem dois padrões de hover, aplicados por tipo de elemento:
 - **Elementos "sólidos"** (botão, card): elevação (translateY + escala de sombra).
 - **Links de texto simples**: só mudança de cor.
@@ -84,13 +102,21 @@ que possível, em vez de introduzir um breakpoint específico só para ele.
 
 ## Réplica de UI de terceiros (exceção de cor) — *Camada C*
 
-O mockup de WhatsApp (`.whatsapp-mock`) e o botão flutuante (`.whatsapp-float`) usam
-cores fixas fora da paleta da marca (verde `#25d366`, fundo de chat `#e5efdb`/`#1f2a19`)
+O botão flutuante (`.whatsapp-float`) e o fundo de chat do mockup (`.whatsapp-mock__body`)
+usam cores fixas fora da paleta da marca (verde `#25d366`, chat `#f3efe7`/`#2a231c`)
 porque replicam a identidade visual **do WhatsApp**, não da marca Rafaela Schumacher.
-Essa é a única situação no código atual em que uma cor fora do token é aceitável: quando
-o elemento está deliberadamente imitando a UI de um produto externo reconhecível. Isso
-não abre precedente geral para cores soltas — qualquer novo caso desse tipo deve ser
-confirmado com o usuário antes de ser tratado como uma exceção válida.
+Repare que o resto do card de depoimento **é** da marca: a barra do cabeçalho usa o
+degradê bronze oficial, não o verde do WhatsApp.
+
+Há ainda uma segunda exceção do mesmo tipo: `.whatsapp-mock__body--photo` usa `#f6f2ea`
+para casar com o papel de parede que já vem dentro dos prints de conversa, de modo que a
+imagem se funda ao card em vez de aparecer colada sobre um branco.
+
+Essas são as únicas situações no código atual em que uma cor fora do token é aceitável:
+quando o elemento imita a UI de um produto externo reconhecível, ou quando precisa casar
+com o conteúdo de uma imagem real. Isso não abre precedente geral para cores soltas —
+qualquer novo caso desse tipo deve ser confirmado com o usuário antes de ser tratado como
+uma exceção válida.
 
 ## Animação de entrada ao rolar a página — *Camada B*
 
