@@ -1,38 +1,75 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rafaela Schumacher | Nutricionista</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rafaela Schumacher | Nutricionista — Acompanhamento online</title>
   <meta name="description" content="Acompanhamento nutricional online com Rafaela Schumacher, para mulheres que querem um plano alimentar que caiba na vida real. Sem dietas malucas, sem extremos.">
+  <meta name="author" content="Rafaela Schumacher">
 
   <link rel="canonical" href="https://rafaelaschumacher.github.io/consultoriaonline/">
+
+  <!-- Ícones -->
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0F0E0C" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+
+  <!-- Compartilhamento -->
+  <meta property="og:site_name" content="Rafaela Schumacher">
   <meta property="og:title" content="Rafaela Schumacher | Nutricionista">
   <meta property="og:description" content="Acompanhamento nutricional online, com estratégia individualizada e resultados que você consegue manter a longo prazo.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rafaelaschumacher.github.io/consultoriaonline/">
   <meta property="og:image" content="https://rafaelaschumacher.github.io/consultoriaonline/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rafaela Schumacher — Nutricionista, acompanhamento online">
   <meta property="og:locale" content="pt_BR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Rafaela Schumacher | Nutricionista">
   <meta name="twitter:description" content="Acompanhamento nutricional online, com estratégia individualizada e resultados que você consegue manter a longo prazo.">
   <meta name="twitter:image" content="https://rafaelaschumacher.github.io/consultoriaonline/assets/og-image.png">
+
+  <!-- Tema: aplicado antes da pintura para não piscar -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('tema');
+        if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+      } catch (e) { /* localStorage bloqueado: mantém o padrão escuro */ }
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
 </head>
 <body>
 
-  <!-- Header -->
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <div class="nav-scrim" id="navScrim" hidden></div>
+
+  <!-- ===== Header ===== -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="#topo" class="logo">Rafaela <span class="logo__last">Schumacher</span></a>
 
-      <nav class="nav" id="nav">
+      <a href="#topo" class="brand" aria-label="Rafaela Schumacher, nutricionista — início">
+        <span class="brand__mark" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="Rafaela Schumacher"><circle cx="100.0" cy="100.0" r="88" stroke="currentColor" stroke-width="1.5"/><path d="M105.70 136.88Q103.74 136.88 99.26 132.31Q94.79 127.74 88.49 119.22Q82.19 110.70 74.38 99.02L81.08 96.94Q91.09 111.22 98.09 119.69Q105.08 128.17 110.46 131.81Q115.84 135.46 120.85 135.46Q121.18 135.46 121.18 136.17Q121.18 136.88 120.85 136.88Q114.95 136.88 111.22 136.88Q107.49 136.88 105.70 136.88ZM75.98 62.77Q85.42 62.77 90.42 67.05Q95.41 71.34 95.41 78.32Q95.41 84.72 91.70 89.85Q88.00 94.99 81.92 97.94Q75.84 100.89 68.64 100.89Q67.46 100.89 65.99 100.79Q64.51 100.70 63.29 100.58V127.32Q63.29 130.74 63.97 132.51Q64.66 134.28 66.85 134.87Q69.05 135.46 73.36 135.46Q73.69 135.46 73.69 136.17Q73.69 136.88 73.36 136.88Q70.48 136.88 67.04 136.76Q63.59 136.64 59.39 136.64Q55.52 136.64 51.92 136.76Q48.32 136.88 45.45 136.88Q45.19 136.88 45.19 136.17Q45.19 135.46 45.45 135.46Q49.76 135.46 51.96 134.87Q54.15 134.28 54.94 132.51Q55.73 130.74 55.73 127.32V72.68Q55.73 69.26 55.00 67.55Q54.27 65.84 52.12 65.19Q49.98 64.54 45.66 64.54Q45.33 64.54 45.33 63.83Q45.33 63.12 45.66 63.12Q48.44 63.12 51.98 63.30Q55.52 63.48 59.39 63.48Q63.10 63.48 67.90 63.12Q72.70 62.77 75.98 62.77ZM87.43 81.77Q87.43 75.28 85.49 71.53Q83.56 67.77 80.00 66.13Q76.43 64.49 71.45 64.49Q67.11 64.49 65.20 66.08Q63.29 67.66 63.29 72.92V97.75Q64.94 97.89 66.87 98.01Q68.81 98.12 70.32 98.12Q79.83 98.12 83.63 93.96Q87.43 89.79 87.43 81.77Z" fill="currentColor"/><path d="M118.87 76.93Q118.87 81.79 121.27 85.25Q123.66 88.71 127.47 91.33Q131.29 93.95 135.51 96.47Q139.90 99.02 143.92 101.86Q147.95 104.71 150.60 108.59Q153.26 112.47 153.26 118.14Q153.26 123.73 150.46 128.31Q147.66 132.89 142.27 135.59Q136.88 138.29 129.00 138.29Q126.21 138.29 123.41 137.87Q120.62 137.44 117.87 136.52Q115.12 135.60 112.38 134.14Q111.82 133.78 111.60 133.28Q111.39 132.77 111.30 131.90L109.81 115.87Q109.69 115.28 110.34 115.22Q110.99 115.16 111.11 115.63Q111.84 119.20 113.40 122.84Q114.95 126.49 117.42 129.54Q119.89 132.58 123.43 134.48Q126.97 136.38 131.69 136.38Q135.16 136.38 138.39 135.10Q141.62 133.83 143.69 130.88Q145.75 127.93 145.75 122.81Q145.75 117.07 143.23 113.22Q140.70 109.36 136.81 106.54Q132.91 103.72 128.57 101.19Q124.44 98.67 120.57 95.92Q116.70 93.17 114.29 89.45Q111.89 85.73 111.89 80.26Q111.89 74.03 115.08 69.93Q118.28 65.84 123.34 63.83Q128.41 61.83 133.83 61.83Q137.14 61.83 140.68 62.50Q144.22 63.17 147.64 64.61Q148.63 64.99 149.02 65.53Q149.41 66.08 149.41 66.69L150.26 80.16Q150.26 80.61 149.63 80.65Q149.01 80.68 148.87 80.24Q148.54 77.88 147.47 75.01Q146.41 72.14 144.43 69.54Q142.45 66.95 139.38 65.26Q136.31 63.57 131.97 63.57Q127.32 63.57 124.43 65.51Q121.54 67.44 120.21 70.45Q118.87 73.46 118.87 76.93Z" fill="currentColor"/></svg></span>
+        <span class="brand__text">
+          <span class="brand__name">Rafaela <em>Schumacher</em></span>
+          <span class="brand__role">Nutricionista</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegação principal">
         <a href="#sobre" class="nav__link">Sobre</a>
         <a href="#para-voce" class="nav__link">Para você</a>
+        <a href="#como-funciona" class="nav__link">Como funciona</a>
         <a href="#consulta" class="nav__link">O que inclui</a>
         <a href="#planos" class="nav__link">Planos</a>
         <a href="#depoimentos" class="nav__link">Depoimentos</a>
@@ -40,109 +77,149 @@
         <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Quero%20come%C3%A7ar%20meu%20acompanhamento." target="_blank" rel="noopener" class="btn btn--primary btn--sm nav__cta">Quero começar</a>
       </nav>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="header__tools">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar entre tema claro e escuro">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+          <span class="menu-toggle__box" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+
     </div>
   </header>
 
-  <main id="topo">
+  <main id="conteudo">
 
-    <!-- Hero -->
-    <section class="hero">
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="topo">
       <div class="container hero__inner">
         <div class="hero__content" data-reveal>
-          <h1>Você não precisa de mais uma dieta, você precisa de uma estratégia que <em>caiba na sua rotina</em></h1>
+          <span class="eyebrow">Acompanhamento nutricional online</span>
+          <h1>Você não precisa de mais uma dieta. Precisa de uma estratégia que <em>caiba na sua rotina</em>.</h1>
+          <p class="hero__lead">Para mulheres que querem resultado sem extremos, sem culpa e sem recomeçar toda segunda-feira.</p>
           <div class="hero__actions">
             <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Quero%20come%C3%A7ar%20meu%20acompanhamento." target="_blank" rel="noopener" class="btn btn--primary">Quero começar agora</a>
+            <a href="#planos" class="btn btn--outline">Conhecer os planos</a>
           </div>
+          <ul class="hero__trust">
+            <li>100% online</li>
+            <li>Plano individualizado</li>
+            <li>Suporte no WhatsApp</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Sobre -->
+    <!-- ===== Sobre ===== -->
     <section class="about" id="sobre">
       <div class="container about__inner">
-        <div class="about__avatar" data-reveal>
-          <img class="about-photo" src="assets/sobre-mim.jpg" alt="Rafaela Schumacher treinando na academia">
-        </div>
+        <figure class="about__figure" data-reveal>
+          <picture>
+            <source srcset="assets/palco.webp" type="image/webp">
+            <img class="about-photo" src="assets/palco.jpg" width="900" height="1350"
+                 alt="Rafaela Schumacher no palco do Olympia Amateur Brasil, competindo na categoria wellness"
+                 loading="lazy" decoding="async">
+          </picture>
+          <!-- A legenda é o que transforma a foto de palco em credencial. Sem ela, a
+               imagem lê como "é assim que você tem que ficar" — o oposto do texto ao lado. -->
+          <figcaption class="about__credential">Olympia Amateur Brasil &middot; 2025</figcaption>
+        </figure>
         <div class="about__content" data-reveal>
-          <span class="eyebrow"><span class="sparkle" aria-hidden="true">&#10022;</span> Sobre o acompanhamento</span>
+          <span class="eyebrow">Sobre o acompanhamento</span>
           <h2>Obrigada por considerar meu acompanhamento.</h2>
           <p>Acredito que uma alimentação saudável deve se adaptar à rotina de cada pessoa, e não o contrário.</p>
-          <p>Trabalho com mulheres que querem resultados consistentes com uma estratégia individualizada, acompanhamento próximo e mudanças que realmente cabem na sua rotina.</p>
-          <p>Mais do que um plano alimentar, você tem alguém ao seu lado durante todo o processo. Acompanho sua evolução de perto, faço os ajustes necessários e ofereço o suporte para que tudo aconteça de forma <em>leve</em>, <em>sustentável</em> e no seu tempo.</p>
-          <div class="about__tags">
-            <span class="tag">Nutrição esportiva</span>
-            <span class="tag">Emagrecimento e recomposição corporal</span>
-            <span class="tag">Estética feminina</span>
-            <span class="tag">Saúde da mulher</span>
-            <span class="tag">Comportamento alimentar</span>
-          </div>
+          <p>Trabalho com mulheres que querem resultados consistentes, com uma estratégia individualizada, acompanhamento próximo e mudanças que realmente cabem na sua rotina.</p>
+          <p>Mais do que um plano alimentar, você tem alguém ao seu lado durante todo o processo. Acompanho a sua evolução de perto, faço os ajustes necessários e ofereço o suporte para que tudo aconteça de forma <em>leve</em>, <em>sustentável</em> e no seu tempo.</p>
+          <ul class="about__tags">
+            <li class="tag">Nutrição esportiva</li>
+            <li class="tag">Emagrecimento e recomposição corporal</li>
+            <li class="tag">Estética feminina</li>
+            <li class="tag">Saúde da mulher</li>
+            <li class="tag">Comportamento alimentar</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Para quem é -->
-    <section class="who" id="para-voce">
+    <!-- ===== Para quem é ===== -->
+    <section class="who panel" id="para-voce">
       <div class="container who__inner">
         <div class="who__content" data-reveal>
-          <h2>Esse acompanhamento é pra você que vive no 8 ou 80 com a comida, se sente perdida na rotina e ainda mais fora dela, quer um plano que acompanhe sua vida e busca resultado sem extremos, sem culpa e sem recomeçar toda semana.</h2>
+          <span class="eyebrow">Para você</span>
+          <h2>Este acompanhamento é para você que…</h2>
+          <ul class="who__list">
+            <li>Vive no oito ou oitenta com a comida.</li>
+            <li>Se sente perdida na rotina — e ainda mais fora dela.</li>
+            <li>Quer um plano que acompanhe a sua vida, e não o contrário.</li>
+            <li>Busca resultado sem extremos, sem culpa e sem recomeçar toda semana.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- O que você recebe -->
+    <!-- ===== Como funciona ===== -->
+    <section class="steps" id="como-funciona">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Como funciona</span>
+          <h2>Do primeiro contato ao seu plano</h2>
+        </div>
+        <div class="steps__grid" data-reveal data-reveal-stagger>
+          <article class="step" style="--i:0">
+            <h3>Conversa</h3>
+            <p>Você me chama no WhatsApp, conta os seus objetivos e eu indico o plano que faz mais sentido para o seu momento.</p>
+          </article>
+          <article class="step" style="--i:1">
+            <h3>Agendamento</h3>
+            <p>A consulta é marcada após a confirmação do pagamento, em um horário que caiba na sua agenda.</p>
+          </article>
+          <article class="step" style="--i:2">
+            <h3>Sua consulta</h3>
+            <p>Avaliação completa e um plano alimentar montado a partir da sua rotina, das suas preferências e do seu objetivo.</p>
+          </article>
+          <article class="step" style="--i:3">
+            <h3>Acompanhamento</h3>
+            <p>Check-ins quinzenais, ajustes sempre que necessário e suporte pelo WhatsApp durante todo o período.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== O que inclui ===== -->
     <section class="includes" id="consulta">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow"><span class="sparkle" aria-hidden="true">&#10022;</span> O que inclui</span>
-          <h2>Tudo pensado pra facilitar sua rotina</h2>
+          <span class="eyebrow">O que inclui</span>
+          <h2>Tudo pensado para facilitar a sua rotina</h2>
         </div>
-        <div class="includes__grid">
-          <div class="includes__item" data-reveal>
-            <p>Plano alimentar adequado à sua rotina e preferências</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Atendimento personalizado voltado aos seus objetivos</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Orientações e tarefas para trabalhar suas principais dificuldades</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Prescrições de suplemento quando necessário</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Materiais exclusivos</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Lista de compras</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Acesso ao aplicativo WebDiet com Diário Alimentar</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Feedback quinzenal</p>
-          </div>
-          <div class="includes__item" data-reveal>
-            <p>Suporte online</p>
-          </div>
+        <div class="includes__grid" data-reveal data-reveal-stagger>
+          <div class="includes__item" style="--i:0"><p>Plano alimentar adequado à sua rotina e às suas preferências</p></div>
+          <div class="includes__item" style="--i:1"><p>Atendimento personalizado voltado aos seus objetivos</p></div>
+          <div class="includes__item" style="--i:2"><p>Orientações e tarefas para trabalhar as suas principais dificuldades</p></div>
+          <div class="includes__item" style="--i:3"><p>Prescrição de suplementos quando necessário</p></div>
+          <div class="includes__item" style="--i:4"><p>Materiais exclusivos</p></div>
+          <div class="includes__item" style="--i:5"><p>Lista de compras</p></div>
+          <div class="includes__item" style="--i:6"><p>Acesso ao aplicativo WebDiet com diário alimentar</p></div>
+          <div class="includes__item" style="--i:7"><p>Feedback quinzenal</p></div>
+          <div class="includes__item" style="--i:8"><p>Suporte online</p></div>
         </div>
       </div>
     </section>
 
-    <!-- Planos -->
+    <!-- ===== Planos ===== -->
     <section class="services" id="planos">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow"><span class="sparkle" aria-hidden="true">&#10022;</span> Planos</span>
+          <span class="eyebrow">Planos</span>
           <h2>Escolha o plano que faz sentido para você</h2>
         </div>
 
-        <div class="services__grid services__grid--3">
+        <div class="services__grid" data-reveal data-reveal-stagger>
 
-          <!-- Consulta Avulsa -->
-          <article class="plan-card" data-reveal>
+          <article class="plan-card" style="--i:0">
             <h3>Consulta <em>Avulsa</em></h3>
             <ul class="plan-card__list">
               <li>Uma consulta</li>
@@ -152,8 +229,7 @@
             <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Quero%20agendar%20a%20Consulta%20Avulsa." target="_blank" rel="noopener" class="btn btn--outline plan-card__cta">Quero essa consulta</a>
           </article>
 
-          <!-- Trimestral -->
-          <article class="plan-card plan-card--highlight" data-reveal>
+          <article class="plan-card plan-card--highlight" style="--i:1">
             <span class="plan-card__badge">Mais escolhido</span>
             <h3>Acompanhamento <em>Trimestral</em></h3>
             <ul class="plan-card__list">
@@ -164,8 +240,7 @@
             <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Quero%20o%20Acompanhamento%20Trimestral." target="_blank" rel="noopener" class="btn btn--primary plan-card__cta">Quero esse plano</a>
           </article>
 
-          <!-- Semestral -->
-          <article class="plan-card" data-reveal>
+          <article class="plan-card" style="--i:2">
             <h3>Acompanhamento <em>Semestral</em></h3>
             <ul class="plan-card__list">
               <li>6 consultas</li>
@@ -176,191 +251,309 @@
           </article>
 
         </div>
-        <p class="services__payment">Pagamento via PIX ou cartão de crédito, à vista ou parcelado conforme as condições da operadora. Fale comigo no WhatsApp pra saber os valores.</p>
+        <p class="services__payment">Pagamento via PIX ou cartão de crédito, à vista ou parcelado conforme as condições da operadora. Fale comigo no WhatsApp para saber os valores.</p>
       </div>
     </section>
 
-    <!-- Depoimentos -->
+    <!-- ===== Depoimentos ===== -->
     <section class="testimonials" id="depoimentos">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow"><span class="sparkle" aria-hidden="true">&#10022;</span> Quem já viveu esse acompanhamento</span>
+          <span class="eyebrow">Quem já viveu esse acompanhamento</span>
           <h2>Depoimentos</h2>
+          <p>Mensagens reais de pacientes, compartilhadas com autorização.</p>
         </div>
-        <div class="testimonials__grid">
+        <div class="testimonials__grid" data-reveal>
 
-          <article class="whatsapp-mock" data-reveal>
-            <div class="whatsapp-mock__header">
-              <div class="whatsapp-mock__avatar photo-placeholder"></div>
-              <span class="whatsapp-mock__name">Paciente.</span>
+          <article class="testimonial">
+            <div class="testimonial__header">
+              <span class="testimonial__avatar" aria-hidden="true">P</span>
+              <span class="testimonial__name">Paciente</span>
             </div>
-            <div class="whatsapp-mock__body whatsapp-mock__body--photo">
-              <img src="assets/testimonials/depoimento-4.jpg" alt="Print de conversa no WhatsApp: paciente conta que chegou aos 60kg, resultado que não conseguia desde 2019." class="whatsapp-mock__screenshot" loading="lazy">
-            </div>
+            <button class="testimonial__btn" type="button" data-lightbox>
+              <picture>
+                <source srcset="assets/testimonials/depoimento-4.webp" type="image/webp">
+                <img src="assets/testimonials/depoimento-4.jpg" width="700" height="287" loading="lazy" decoding="async"
+                     alt="Print de conversa no WhatsApp: paciente conta que chegou aos 60 kg, resultado que não conseguia desde 2019.">
+              </picture>
+            </button>
           </article>
 
-          <article class="whatsapp-mock" data-reveal>
-            <div class="whatsapp-mock__header">
-              <div class="whatsapp-mock__avatar photo-placeholder"></div>
-              <span class="whatsapp-mock__name">Paciente.</span>
+          <article class="testimonial">
+            <div class="testimonial__header">
+              <span class="testimonial__avatar" aria-hidden="true">P</span>
+              <span class="testimonial__name">Paciente</span>
             </div>
-            <div class="whatsapp-mock__body whatsapp-mock__body--photo">
-              <img src="assets/testimonials/depoimento-2.jpg" alt="Print de conversa no WhatsApp: paciente agradece o acompanhamento, dizendo que ele vai além da dieta e ajudou também no psicológico." class="whatsapp-mock__screenshot" loading="lazy">
-            </div>
+            <button class="testimonial__btn" type="button" data-lightbox>
+              <picture>
+                <source srcset="assets/testimonials/depoimento-2.webp" type="image/webp">
+                <img src="assets/testimonials/depoimento-2.jpg" width="700" height="530" loading="lazy" decoding="async"
+                     alt="Print de conversa no WhatsApp: paciente agradece o acompanhamento, dizendo que ele vai além da dieta e ajudou também no psicológico.">
+              </picture>
+            </button>
           </article>
 
-          <article class="whatsapp-mock" data-reveal>
-            <div class="whatsapp-mock__header">
-              <div class="whatsapp-mock__avatar photo-placeholder"></div>
-              <span class="whatsapp-mock__name">Paciente.</span>
+          <article class="testimonial">
+            <div class="testimonial__header">
+              <span class="testimonial__avatar" aria-hidden="true">P</span>
+              <span class="testimonial__name">Paciente</span>
             </div>
-            <div class="whatsapp-mock__body whatsapp-mock__body--photo">
-              <img src="assets/testimonials/depoimento-3.jpg" alt="Print de conversa no WhatsApp: paciente diz que já foi em outras nutricionistas, mas essa é a primeira dieta que consegue seguir." class="whatsapp-mock__screenshot" loading="lazy">
-            </div>
+            <button class="testimonial__btn" type="button" data-lightbox>
+              <picture>
+                <source srcset="assets/testimonials/depoimento-3.webp" type="image/webp">
+                <img src="assets/testimonials/depoimento-3.jpg" width="700" height="633" loading="lazy" decoding="async"
+                     alt="Print de conversa no WhatsApp: paciente diz que já foi a outras nutricionistas, mas essa é a primeira dieta que consegue seguir.">
+              </picture>
+            </button>
           </article>
 
-          <article class="whatsapp-mock" data-reveal>
-            <div class="whatsapp-mock__header">
-              <div class="whatsapp-mock__avatar photo-placeholder"></div>
-              <span class="whatsapp-mock__name">Paciente.</span>
+          <article class="testimonial">
+            <div class="testimonial__header">
+              <span class="testimonial__avatar" aria-hidden="true">P</span>
+              <span class="testimonial__name">Paciente</span>
             </div>
-            <div class="whatsapp-mock__body whatsapp-mock__body--photo">
-              <img src="assets/testimonials/depoimento-5.jpg" alt="Print de conversa no WhatsApp: paciente relata que nunca tinha feito dieta com nutricionista e achou as refeições simples de manter." class="whatsapp-mock__screenshot" loading="lazy">
-            </div>
+            <button class="testimonial__btn" type="button" data-lightbox>
+              <picture>
+                <source srcset="assets/testimonials/depoimento-5.webp" type="image/webp">
+                <img src="assets/testimonials/depoimento-5.jpg" width="700" height="400" loading="lazy" decoding="async"
+                     alt="Print de conversa no WhatsApp: paciente relata que nunca tinha feito dieta com nutricionista e achou as refeições simples de manter.">
+              </picture>
+            </button>
           </article>
 
-          <article class="whatsapp-mock" data-reveal>
-            <div class="whatsapp-mock__header">
-              <div class="whatsapp-mock__avatar photo-placeholder"></div>
-              <span class="whatsapp-mock__name">Paciente.</span>
+          <article class="testimonial">
+            <div class="testimonial__header">
+              <span class="testimonial__avatar" aria-hidden="true">P</span>
+              <span class="testimonial__name">Paciente</span>
             </div>
-            <div class="whatsapp-mock__body whatsapp-mock__body--photo">
-              <img src="assets/testimonials/depoimento-6.jpg" alt="Print de conversa no WhatsApp: paciente diz que é uma das dietas mais práticas e gostosas de fazer, e que se adaptou muito fácil." class="whatsapp-mock__screenshot" loading="lazy">
-            </div>
+            <button class="testimonial__btn" type="button" data-lightbox>
+              <picture>
+                <source srcset="assets/testimonials/depoimento-6.webp" type="image/webp">
+                <img src="assets/testimonials/depoimento-6.jpg" width="700" height="384" loading="lazy" decoding="async"
+                     alt="Print de conversa no WhatsApp: paciente diz que é uma das dietas mais práticas e gostosas de fazer, e que se adaptou muito fácil.">
+              </picture>
+            </button>
           </article>
 
-          <article class="whatsapp-mock" data-reveal>
-            <div class="whatsapp-mock__header">
-              <div class="whatsapp-mock__avatar photo-placeholder"></div>
-              <span class="whatsapp-mock__name">Paciente.</span>
+          <article class="testimonial">
+            <div class="testimonial__header">
+              <span class="testimonial__avatar" aria-hidden="true">P</span>
+              <span class="testimonial__name">Paciente</span>
             </div>
-            <div class="whatsapp-mock__body whatsapp-mock__body--photo">
-              <img src="assets/testimonials/depoimento-1.jpg" alt="Print de conversa no WhatsApp: paciente conta que ficou menos ansiosa em relação à comida e se sente mais leve pela manhã." class="whatsapp-mock__screenshot" loading="lazy">
-            </div>
+            <button class="testimonial__btn" type="button" data-lightbox>
+              <picture>
+                <source srcset="assets/testimonials/depoimento-1.webp" type="image/webp">
+                <img src="assets/testimonials/depoimento-1.jpg" width="700" height="678" loading="lazy" decoding="async"
+                     alt="Print de conversa no WhatsApp: paciente conta que ficou menos ansiosa em relação à comida e se sente mais leve pela manhã.">
+              </picture>
+            </button>
           </article>
 
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- ===== FAQ ===== -->
     <section class="faq" id="faq">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow"><span class="sparkle" aria-hidden="true">&#10022;</span> Ainda com dúvidas?</span>
+          <span class="eyebrow">Ainda com dúvidas?</span>
           <h2>Perguntas frequentes</h2>
         </div>
         <div class="faq__list" data-reveal>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-btn-1">
               As consultas são realmente 100% online?
-              <span class="faq__icon">+</span>
-            </button>
-            <div class="faq__answer">
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="faq__answer" id="faq-1" role="region" aria-labelledby="faq-btn-1"><div>
               <p>Sim. Todo o acompanhamento acontece de forma online, permitindo que você seja atendida de qualquer lugar, com praticidade e segurança.</p>
-            </div>
+            </div></div>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-btn-2">
               Quanto custa o acompanhamento?
-              <span class="faq__icon">+</span>
-            </button>
-            <div class="faq__answer">
-              <p>Os valores variam conforme o plano escolhido. Me chame no WhatsApp que te passo todos os detalhes e te ajudo a escolher o que faz mais sentido pra você.</p>
-            </div>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="faq__answer" id="faq-2" role="region" aria-labelledby="faq-btn-2"><div>
+              <p>Os valores variam conforme o plano escolhido. Me chame no WhatsApp que eu te passo todos os detalhes e te ajudo a escolher o que faz mais sentido para você.</p>
+            </div></div>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-btn-3">
               Como funciona o agendamento?
-              <span class="faq__icon">+</span>
-            </button>
-            <div class="faq__answer">
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="faq__answer" id="faq-3" role="region" aria-labelledby="faq-btn-3"><div>
               <p>A consulta é agendada após a confirmação do pagamento, e o acompanhamento é contado a partir da data da primeira consulta.</p>
-            </div>
+            </div></div>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
-              Posso remarcar minha consulta?
-              <span class="faq__icon">+</span>
-            </button>
-            <div class="faq__answer">
-              <p>Sim. Solicitações de remarcação devem ser feitas com no mínimo 24 horas de antecedência e estão sujeitas à disponibilidade da agenda.</p>
-            </div>
+            <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-btn-4">
+              Posso remarcar a minha consulta?
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="faq__answer" id="faq-4" role="region" aria-labelledby="faq-btn-4"><div>
+              <p>Sim. As solicitações de remarcação devem ser feitas com no mínimo 24 horas de antecedência e estão sujeitas à disponibilidade da agenda.</p>
+            </div></div>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-btn-5">
               Qual a diferença entre a Consulta Avulsa e os acompanhamentos?
-              <span class="faq__icon">+</span>
-            </button>
-            <div class="faq__answer">
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="faq__answer" id="faq-5" role="region" aria-labelledby="faq-btn-5"><div>
               <p>A Consulta Avulsa é indicada para quem busca uma orientação pontual. Já os acompanhamentos (Trimestral e Semestral) incluem check-ins quinzenais e suporte contínuo pelo WhatsApp ao longo de todo o período.</p>
-            </div>
+            </div></div>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-btn-6">
               Como faço para começar?
-              <span class="faq__icon">+</span>
-            </button>
-            <div class="faq__answer">
-              <p>Basta clicar em qualquer botão do WhatsApp no site e me chamar. Será um prazer conhecer seus objetivos e indicar o plano mais adequado para você.</p>
-            </div>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button></h3>
+            <div class="faq__answer" id="faq-6" role="region" aria-labelledby="faq-btn-6"><div>
+              <p>Basta clicar em qualquer botão do WhatsApp no site e me chamar. Será um prazer conhecer os seus objetivos e indicar o plano mais adequado para você.</p>
+            </div></div>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- CTA final -->
-    <section class="final-cta">
-      <div class="container final-cta__inner" data-reveal>
-        <h2>Tenha acesso a um acompanhamento de verdade para o seu objetivo — sem sofrimento</h2>
+    <!-- ===== CTA final ===== -->
+    <section class="final-cta panel">
+      <div class="container" data-reveal>
+        <span class="eyebrow" style="justify-content:center">Vamos começar?</span>
+        <h2>Um acompanhamento de verdade para o seu objetivo — sem sofrimento</h2>
         <p>Estratégia individualizada, acompanhamento próximo e mudanças que você consegue manter a longo prazo.</p>
-        <p class="final-cta__note">Vamos começar? Entre em contato pelo WhatsApp para escolher o plano que faz sentido para você.</p>
-        <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Quero%20come%C3%A7ar%20meu%20acompanhamento." target="_blank" rel="noopener" class="btn btn--primary">Quero começar agora</a>
+        <p>Entre em contato pelo WhatsApp e vamos escolher juntas o plano que faz sentido para você.</p>
+        <div class="final-cta__actions">
+          <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Quero%20come%C3%A7ar%20meu%20acompanhamento." target="_blank" rel="noopener" class="btn btn--primary">Quero começar agora</a>
+          <a href="#planos" class="btn btn--outline">Rever os planos</a>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Footer -->
+  <!-- ===== Rodapé ===== -->
   <footer class="footer" id="contato">
     <div class="container footer__inner">
+
       <div class="footer__brand">
-        <span class="logo">Rafaela <span class="logo__last">Schumacher</span></span>
-        <p>Nutricionista &bull; Atendimento 100% online</p>
-        <p>Nutrição personalizada para resultados sustentáveis.</p>
+        <span class="brand">
+          <span class="brand__mark" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="Rafaela Schumacher"><circle cx="100.0" cy="100.0" r="88" stroke="currentColor" stroke-width="1.5"/><path d="M105.70 136.88Q103.74 136.88 99.26 132.31Q94.79 127.74 88.49 119.22Q82.19 110.70 74.38 99.02L81.08 96.94Q91.09 111.22 98.09 119.69Q105.08 128.17 110.46 131.81Q115.84 135.46 120.85 135.46Q121.18 135.46 121.18 136.17Q121.18 136.88 120.85 136.88Q114.95 136.88 111.22 136.88Q107.49 136.88 105.70 136.88ZM75.98 62.77Q85.42 62.77 90.42 67.05Q95.41 71.34 95.41 78.32Q95.41 84.72 91.70 89.85Q88.00 94.99 81.92 97.94Q75.84 100.89 68.64 100.89Q67.46 100.89 65.99 100.79Q64.51 100.70 63.29 100.58V127.32Q63.29 130.74 63.97 132.51Q64.66 134.28 66.85 134.87Q69.05 135.46 73.36 135.46Q73.69 135.46 73.69 136.17Q73.69 136.88 73.36 136.88Q70.48 136.88 67.04 136.76Q63.59 136.64 59.39 136.64Q55.52 136.64 51.92 136.76Q48.32 136.88 45.45 136.88Q45.19 136.88 45.19 136.17Q45.19 135.46 45.45 135.46Q49.76 135.46 51.96 134.87Q54.15 134.28 54.94 132.51Q55.73 130.74 55.73 127.32V72.68Q55.73 69.26 55.00 67.55Q54.27 65.84 52.12 65.19Q49.98 64.54 45.66 64.54Q45.33 64.54 45.33 63.83Q45.33 63.12 45.66 63.12Q48.44 63.12 51.98 63.30Q55.52 63.48 59.39 63.48Q63.10 63.48 67.90 63.12Q72.70 62.77 75.98 62.77ZM87.43 81.77Q87.43 75.28 85.49 71.53Q83.56 67.77 80.00 66.13Q76.43 64.49 71.45 64.49Q67.11 64.49 65.20 66.08Q63.29 67.66 63.29 72.92V97.75Q64.94 97.89 66.87 98.01Q68.81 98.12 70.32 98.12Q79.83 98.12 83.63 93.96Q87.43 89.79 87.43 81.77Z" fill="currentColor"/><path d="M118.87 76.93Q118.87 81.79 121.27 85.25Q123.66 88.71 127.47 91.33Q131.29 93.95 135.51 96.47Q139.90 99.02 143.92 101.86Q147.95 104.71 150.60 108.59Q153.26 112.47 153.26 118.14Q153.26 123.73 150.46 128.31Q147.66 132.89 142.27 135.59Q136.88 138.29 129.00 138.29Q126.21 138.29 123.41 137.87Q120.62 137.44 117.87 136.52Q115.12 135.60 112.38 134.14Q111.82 133.78 111.60 133.28Q111.39 132.77 111.30 131.90L109.81 115.87Q109.69 115.28 110.34 115.22Q110.99 115.16 111.11 115.63Q111.84 119.20 113.40 122.84Q114.95 126.49 117.42 129.54Q119.89 132.58 123.43 134.48Q126.97 136.38 131.69 136.38Q135.16 136.38 138.39 135.10Q141.62 133.83 143.69 130.88Q145.75 127.93 145.75 122.81Q145.75 117.07 143.23 113.22Q140.70 109.36 136.81 106.54Q132.91 103.72 128.57 101.19Q124.44 98.67 120.57 95.92Q116.70 93.17 114.29 89.45Q111.89 85.73 111.89 80.26Q111.89 74.03 115.08 69.93Q118.28 65.84 123.34 63.83Q128.41 61.83 133.83 61.83Q137.14 61.83 140.68 62.50Q144.22 63.17 147.64 64.61Q148.63 64.99 149.02 65.53Q149.41 66.08 149.41 66.69L150.26 80.16Q150.26 80.61 149.63 80.65Q149.01 80.68 148.87 80.24Q148.54 77.88 147.47 75.01Q146.41 72.14 144.43 69.54Q142.45 66.95 139.38 65.26Q136.31 63.57 131.97 63.57Q127.32 63.57 124.43 65.51Q121.54 67.44 120.21 70.45Q118.87 73.46 118.87 76.93Z" fill="currentColor"/></svg></span>
+          <span class="brand__text">
+            <span class="brand__name">Rafaela <em>Schumacher</em></span>
+            <span class="brand__role">Nutricionista</span>
+          </span>
+        </span>
+        <p>Nutrição personalizada para resultados sustentáveis. Atendimento 100% online.</p>
       </div>
-      <div class="footer__links">
-        <a href="https://wa.me/5547984214838" target="_blank" rel="noopener">WhatsApp: (47) 98421-4838</a>
-        <a href="https://instagram.com/rafaschumacherr" target="_blank" rel="noopener">Instagram: @rafaschumacherr</a>
+
+      <div class="footer__col">
+        <h3>Contato</h3>
+        <ul class="footer__list">
+          <li><a href="https://wa.me/5547984214838" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.6.6 2.2.7 3 .5a2.5 2.5 0 0 0 1.6-1.1c.2-.5.2-.9.1-1l-.3-.1Z"/></svg>
+            (47) 98421-4838</a></li>
+          <li><a href="https://instagram.com/rafaschumacherr" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+            @rafaschumacherr</a></li>
+          <li><span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Atendimento 100% online</span></li>
+        </ul>
       </div>
+
+      <div class="footer__col">
+        <h3>Navegação</h3>
+        <ul class="footer__list">
+          <li><a href="#sobre">Sobre o acompanhamento</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#consulta">O que inclui</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#faq">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+
     </div>
     <div class="container footer__bottom">
-      <p>&copy; <span id="year"></span> Rafaela Schumacher. Todos os direitos reservados.</p>
+      <p>&copy; <span id="year">2026</span> Rafaela Schumacher</p>
+      <p>Todos os direitos reservados</p>
     </div>
   </footer>
 
   <!-- Botão flutuante WhatsApp -->
-  <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Falar no WhatsApp">
-    <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.34.68 4.52 1.86 6.36L4 29l7.84-1.82A11.94 11.94 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm0 21.8c-1.96 0-3.79-.55-5.35-1.5l-.38-.23-4.65 1.08 1.1-4.53-.25-.4A9.7 9.7 0 0 1 5.9 15c0-5.57 4.53-10.1 10.1-10.1 5.57 0 10.1 4.53 10.1 10.1 0 5.57-4.53 10.1-10.1 10.1zm5.5-7.55c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37s-1.04 1.02-1.04 2.48 1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+  <a href="https://wa.me/5547984214838?text=Ol%C3%A1%20Rafaela!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" class="whatsapp-float" id="whatsappFloat" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 32 32" width="27" height="27" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.34.68 4.52 1.86 6.36L4 29l7.84-1.82A11.94 11.94 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm0 21.8c-1.96 0-3.79-.55-5.35-1.5l-.38-.23-4.65 1.08 1.1-4.53-.25-.4A9.7 9.7 0 0 1 5.9 15c0-5.57 4.53-10.1 10.1-10.1 5.57 0 10.1 4.53 10.1 10.1 0 5.57-4.53 10.1-10.1 10.1zm5.5-7.55c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37s-1.04 1.02-1.04 2.48 1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
   </a>
 
-  <script src="js/main.js"></script>
+  <!-- Lightbox dos depoimentos -->
+  <dialog class="lightbox" id="lightbox" aria-label="Depoimento ampliado">
+    <button class="lightbox__close" type="button" id="lightboxClose" aria-label="Fechar">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+  </dialog>
+
+  <!-- Dados estruturados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["ProfessionalService", "MedicalBusiness"],
+        "@id": "https://rafaelaschumacher.github.io/consultoriaonline/#negocio",
+        "name": "Rafaela Schumacher — Nutricionista",
+        "description": "Acompanhamento nutricional online para mulheres, com plano alimentar individualizado, check-ins quinzenais e suporte pelo WhatsApp.",
+        "url": "https://rafaelaschumacher.github.io/consultoriaonline/",
+        "image": "https://rafaelaschumacher.github.io/consultoriaonline/assets/og-image.png",
+        "telephone": "+5547984214838",
+        "priceRange": "$$",
+        "areaServed": { "@type": "Country", "name": "Brasil" },
+        "availableLanguage": "pt-BR",
+        "sameAs": ["https://instagram.com/rafaschumacherr"],
+        "provider": { "@id": "https://rafaelaschumacher.github.io/consultoriaonline/#pessoa" },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Planos de acompanhamento nutricional",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consulta Avulsa", "description": "Uma consulta, plano alimentar único e suporte inicial pelo WhatsApp." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Acompanhamento Trimestral", "description": "3 consultas, check-ins quinzenais e suporte pelo WhatsApp durante 3 meses." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Acompanhamento Semestral", "description": "6 consultas, check-ins quinzenais e suporte pelo WhatsApp durante 6 meses." } }
+          ]
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://rafaelaschumacher.github.io/consultoriaonline/#pessoa",
+        "name": "Rafaela Schumacher",
+        "jobTitle": "Nutricionista",
+        "url": "https://rafaelaschumacher.github.io/consultoriaonline/",
+        "sameAs": ["https://instagram.com/rafaschumacherr"],
+        "knowsAbout": ["Nutrição esportiva", "Emagrecimento", "Recomposição corporal", "Saúde da mulher", "Comportamento alimentar"]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "As consultas são realmente 100% online?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Todo o acompanhamento acontece de forma online, permitindo que você seja atendida de qualquer lugar, com praticidade e segurança." } },
+          { "@type": "Question", "name": "Quanto custa o acompanhamento?", "acceptedAnswer": { "@type": "Answer", "text": "Os valores variam conforme o plano escolhido. Entre em contato pelo WhatsApp para receber todos os detalhes e escolher o plano mais adequado." } },
+          { "@type": "Question", "name": "Como funciona o agendamento?", "acceptedAnswer": { "@type": "Answer", "text": "A consulta é agendada após a confirmação do pagamento, e o acompanhamento é contado a partir da data da primeira consulta." } },
+          { "@type": "Question", "name": "Posso remarcar a minha consulta?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. As solicitações de remarcação devem ser feitas com no mínimo 24 horas de antecedência e estão sujeitas à disponibilidade da agenda." } },
+          { "@type": "Question", "name": "Qual a diferença entre a Consulta Avulsa e os acompanhamentos?", "acceptedAnswer": { "@type": "Answer", "text": "A Consulta Avulsa é indicada para quem busca uma orientação pontual. Já os acompanhamentos Trimestral e Semestral incluem check-ins quinzenais e suporte contínuo pelo WhatsApp ao longo de todo o período." } },
+          { "@type": "Question", "name": "Como faço para começar?", "acceptedAnswer": { "@type": "Answer", "text": "Basta clicar em qualquer botão do WhatsApp no site. A partir daí conversamos sobre os seus objetivos e definimos o plano mais adequado." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>

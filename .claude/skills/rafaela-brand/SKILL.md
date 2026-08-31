@@ -18,12 +18,17 @@ identidade que já existe no código do site atual. Nenhum valor aqui foi invent
 ajustado; onde algo ainda não está decidido, isso é declarado explicitamente na seção
 "Decisões em aberto" em vez de ser preenchido com um palpite.
 
-> **Versão atual da identidade: bronze e creme (aprovada pela usuária em 2026-08-31).**
-> Paleta em família quente única (creme `#fefcf9` → bronze `#9c8362` → espresso
-> `#241d17`), tipografia serifada de traço fino (Cormorant Garamond 300) com sans leve no
-> corpo (Jost 300), filete horizontal no lugar do glifo ✦ e assinatura do nome em duas
-> tipografias. Isso **substituiu integralmente** a identidade anterior (verde-sálvia
-> `#7c8f6a` + dourado `#c8a24d`, Playfair Display + Plus Jakarta Sans, motivo ✦) — se
+> **Versão atual da identidade: "Noir & Champagne" (aprovada pela usuária em 2026-08-31).**
+> Base grafite quase preta (`#0F0E0C`), texto marfim (`#F2EDE4`) e dourado champanhe
+> (`#C8A96A`) nos detalhes, com Cormorant Garamond 300 nos títulos e Jost 300 no corpo.
+> **O escuro é o tema principal e o claro é uma alternativa completa** — os dois são
+> oficiais, escolhidos por `data-theme` no elemento raiz com a preferência guardada no
+> navegador, e nenhuma tela pode existir só em um deles. A assinatura da marca passou a
+> ser selo + nome + cargo, e o filete horizontal continua sendo o motivo no lugar do ✦.
+>
+> Isso **substituiu integralmente** as duas identidades anteriores: bronze e creme
+> (`#9c8362` + `#fefcf9`, assinatura em duas tipografias) e, antes dela, verde-sálvia +
+> dourado (`#7c8f6a` + `#c8a24d`, Playfair Display + Plus Jakarta Sans, motivo ✦). Se
 > você encontrar aqueles valores em algum projeto da marca, é resíduo e deve ser migrado.
 
 ## Regra central
@@ -51,9 +56,9 @@ Antes de escrever qualquer CSS, HTML ou estilo inline novo, siga esta ordem:
    escrever `#3b82f6` solto num componente). Nunca decida sozinho que a marca precisa de
    uma cor, fonte, escala ou padrão novo — isso é uma decisão de identidade visual, não
    uma decisão técnica.
-5. **Nunca altere os valores dos tokens existentes** (ex: mudar o verde primário, trocar
-   a fonte) sem o usuário pedir isso explicitamente. Um pedido de "deixa esse botão mais
-   bonito" não é permissão para redefinir `--color-primary`.
+5. **Nunca altere os valores dos tokens existentes** (ex: mudar o dourado, trocar a
+   fonte, inverter qual tema é o principal) sem o usuário pedir isso explicitamente. Um
+   pedido de "deixa esse botão mais bonito" não é permissão para redefinir `--gold`.
 
 Isso vale igualmente para o site atual e para a plataforma de pacientes — mudar um token
 ou padrão em um projeto sem replicar no outro é exatamente o tipo de "drift" visual que
@@ -68,7 +73,7 @@ que é específico deste site:
 
 | Camada | O que é | Deve ir para o segundo projeto? |
 |---|---|---|
-| **A — Identidade da marca** | Cores, família tipográfica e seu peso leve, o motivo de "grifo" com `<em>`, o motivo do filete horizontal, a assinatura do nome em duas tipografias, o rótulo em caixa alta com entreletra larga. O que torna algo "visualmente a marca Rafaela Schumacher", independente de onde aparece. | Sim, sempre — sem alterar valores. |
+| **A — Identidade da marca** | Cores dos **dois temas** e o mecanismo de tema em si, família tipográfica e seu peso leve, o motivo de "grifo" com `<em>`, o motivo do filete horizontal, a assinatura selo + nome + cargo, o rótulo em caixa alta com entreletra larga. O que torna algo "visualmente a marca Rafaela Schumacher", independente de onde aparece. | Sim, sempre — sem alterar valores. |
 | **B — Componentes reutilizáveis** | Peças de UI genéricas construídas com os tokens da camada A: botões, tags, cabeçalho de seção, card, accordion, avatar, placeholder, animação de entrada. | Sim, como padrão/estrutura — a marcação HTML/CSS exata pode se adaptar à stack nova, mas a forma e o comportamento devem ser os mesmos. |
 | **C — Padrões específicos deste site** | Composições de página e componentes ligados ao conteúdo/funcionalidade deste site de consultoria (navegação, mockup de WhatsApp, botão flutuante de WhatsApp, grid do Instagram, layout de cada seção da home). | Não necessariamente — são decisões de produto deste site, não da marca. Avaliar caso a caso. |
 | **D — Decisões ainda não definidas** | Lacunas do design system que ainda não têm um valor oficial (ver seção abaixo). | Não usar até serem definidas — perguntar ao usuário. |
@@ -133,19 +138,20 @@ para "oficial").
   escala nomeada, só valores soltos usados caso a caso no site atual.
 - **Escala de espaçamento** — não existe um conjunto de valores nomeados (ex: 4/8/16/24)
   para `gap`/`padding`/`margin`; o site atual usa valores ad hoc.
-- **Motion tokens** — não existem durações/easings nomeados; o site atual usa
-  `0.2s`/`0.25s`/`0.3s`/`0.7s ease` sem critério documentado de quando usar cada um.
+- **Durações de motion** — a *curva* já é oficial (`--ease: cubic-bezier(.22,.61,.36,1)`,
+  usada em toda transição), mas as durações ainda são escolhidas caso a caso
+  (`.2s` a `.7s`), sem critério documentado de quando usar cada uma.
 - **Escala de z-index** — não existe uma ordem de empilhamento documentada; o site atual
-  só tem valores soltos (`90`, `95` e `100`).
+  só tem valores soltos (`1`, `90`, `98`, `99`, `100` e `999`).
 - **Sistema de ícones** — não existe uma definição de qual conjunto de ícones usar, nem
-  regra de tamanho/cor; o site atual usa apenas SVGs inline ad hoc (o glifo ✦ da
-  identidade anterior foi aposentado em favor do filete).
+  regra de tamanho/cor; o site atual usa apenas SVGs inline ad hoc, com traço de `1.5`–`1.6`
+  (o glifo ✦ das identidades anteriores foi aposentado em favor do filete).
 - **Estados de erro e desabilitado** — não existem definidos em lugar nenhum do CSS atual
   (nenhum estado de erro de formulário, nenhum estado desabilitado de botão). Isso é
   especialmente relevante para a plataforma de pacientes, que provavelmente terá
   formulários e login. O estado de **foco** já existe e é oficial: `outline: 2px solid
-  var(--color-primary)` com `outline-offset: 2px`, virando branco dentro das seções
-  escuras.
+  var(--gold-bright)` com `outline-offset: 3px`, virando `#F4EFE6` dentro dos painéis
+  escuros (`.panel`).
 
 ## Referências
 

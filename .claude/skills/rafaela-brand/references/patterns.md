@@ -1,152 +1,179 @@
 # Padrões visuais — Rafaela Schumacher
 
-Parte do design system oficial da marca (ver `SKILL.md`). Este arquivo documenta
-**apenas padrões que já existem hoje** no código do site — regras de comportamento e
-uso que aparecem de forma repetida em `css/styles.css`/`index.html`/`js/main.js`, mas
-que não são um "token" (um valor único) nem um "componente" (uma peça de UI isolada).
-Nenhum padrão novo foi inventado para este documento.
+Parte do design system oficial da marca (ver `SKILL.md`). Estes são comportamentos e
+composições que já existem no site e que precisam ser **preservados** ao criar qualquer
+coisa nova — aqui ou na plataforma de pacientes. Para os valores em si (cores, fontes,
+raios, sombras), veja `references/tokens.md`.
 
-## Nomenclatura BEM — *Camada B*
+---
 
-Todas as classes seguem `.bloco__elemento--modificador` (ex: `.plan-card__badge`,
-`.btn--outline`, `.whatsapp-mock__header`). Qualquer CSS novo deve seguir o mesmo
-padrão — inclusive na plataforma de pacientes, se ela usar CSS por classe.
+## Os dois temas são um só desenho
 
-## Dark mode automático — *Camada A/B*
+O tema é aplicado por `data-theme="dark"` / `data-theme="light"` no elemento raiz, com a
+escolha guardada em `localStorage` (chave `tema`). Ver `tokens.md` → "Os dois temas são
+iguais em posto" para a ordem de resolução.
 
-O modo escuro é acionado **apenas** por `prefers-color-scheme: dark` (preferência do
-sistema operacional do visitante) — não existe toggle manual nem classe `.dark` no
-código atual. Dentro do dark mode, só os tokens de **superfície** mudam:
-`--color-bg`, `--color-bg-alt`, `--color-surface`, `--color-text`, `--color-text-muted`,
-`--color-border`, `--color-primary-light`. As cores de identidade (`--color-primary`,
-`--color-primary-dark`, `--color-accent`, `--color-deep`) permanecem as mesmas nos dois
-modos — é essa combinação (superfícies mudam, identidade não muda) que faz o dark mode
-"continuar parecendo a marca". Qualquer novo componente/seção deve seguir essa mesma
-regra: nunca redefinir a cor de identidade dentro de um bloco de dark mode.
+Três regras que decorrem disso:
 
-Duas consequências práticas dessa regra, já aplicadas no CSS: o degradê bronze dos botões
-e selos é o mesmo nos dois modos, então o texto sobre ele fica fixo em `#fff` (não
-`var(--color-text)`); e as seções `.who`/`.final-cta` têm fundo escuro nos dois modos,
-então o `outline` de foco dentro delas fica fixo em branco.
+1. **Nunca escreva uma cor literal num componente.** Todo componente lê tokens
+   (`var(--surface)`, `var(--text-muted)`), e são os tokens que trocam de valor. Uma cor
+   fixa dentro de um componente é um bug que só aparece em um dos temas.
+2. **`--on-gold` inverte.** No escuro o texto sobre o dourado é quase preto (`#0F0E0C`);
+   no claro é branco. Se você fixar `#fff` num botão dourado, ele fica ilegível no tema
+   escuro. Use sempre `var(--on-gold)`.
+3. **Os painéis são a exceção, e já têm tokens próprios.** `.panel` é escuro nos dois
+   temas, então o que fica sobre ele usa `--panel-text`, `--panel-muted` e
+   `--gold-on-panel`, que não acompanham o tema. Não tente "adaptar" um painel ao tema
+   claro.
 
-## Ritmo vertical de seção — *Camada B*
+O script que resolve o tema roda **inline no `<head>`, antes da primeira pintura**. Se ele
+for movido para o fim da página ou para um arquivo externo com `defer`, a página passa a
+piscar no tema errado ao carregar. Isso não é detalhe de performance — é visível.
 
-Toda `<section>` de conteúdo usa o mesmo padding vertical: `104px 0` no desktop,
-reduzindo para `68px 0` a partir de `768px` (ver `tokens.md` → Layout). Nenhuma seção do
-site foge desse ritmo. Uma seção nova deve usar o mesmo valor em vez de um padding
-arbitrário — o respiro generoso é parte do que dá o tom premium à marca.
+## Ritmo de seção
 
-## Container e grid de página — *Camada B*
+Toda seção usa `padding-block: var(--section-y)` — `clamp(64px, 8.5vw, 118px)`. O respiro
+generoso é parte da identidade premium. Uma seção nova **não** define o próprio padding
+vertical; usa o token, para que o ritmo da página inteira mude num lugar só.
 
-Todo o conteúdo de cada seção fica dentro de `.container` (`max-width: 1140px`,
-`padding: 0 24px`, centralizado). Layouts internos usam CSS Grid com 2 a 6 colunas
-dependendo da seção, sempre colapsando para menos colunas nos breakpoints já
-documentados em `tokens.md` (nunca um breakpoint novo só para uma grade específica).
+Fundos alternam entre `--bg` e `--bg-alt` para separar seções vizinhas, e os painéis
+escuros (`.panel`) marcam os dois momentos de virada da página: "Para você" e o CTA final.
 
-## Filete como marcador — *Camada A (o motivo) / B (a regra de uso)*
+## O filete como marcador
 
-O motivo visual recorrente da marca é um **filete horizontal**: um retângulo de `1px` de
-altura na cor `--color-accent`, desenhado com `::before` (ou, no eyebrow, pelo próprio
-`.sparkle` esvaziado de texto). Ele aparece em três comprimentos, sempre pela mesma
-lógica — quanto mais importante o rótulo, mais longo o filete:
+O motivo visual mais recorrente da marca é um **filete horizontal de 1px** em dourado, com
+`opacity: .7`. Ele substituiu o glifo ✦ das identidades anteriores — **não volte a
+renderizar um glifo** no lugar dele.
 
-| Onde | Comprimento | Observação |
-|---|---|---|
-| `.eyebrow` (rótulo de seção) | `30px` | Separado do texto por `gap: 14px`. |
-| `.includes__item p::before` | `16px` | `top: 0.72em` para alinhar com a primeira linha. |
-| `.plan-card__list li::before` | `14px` | `top: 0.85em`, `padding-left: 26px` no item. |
+Aparece em três formas:
 
-Este motivo **substituiu o glifo ✦ (sparkle)** da identidade anterior. A classe
-`.sparkle` continua existindo no HTML por compatibilidade, mas hoje é estilizada como
-filete (`font-size: 0`, dimensões fixas) — ela não deve voltar a renderizar um glifo. Ao
-criar uma lista ou rótulo novo, use o filete em vez de introduzir um bullet redondo, um
-ícone ou um glifo unicode.
+- **Eyebrow** (`.eyebrow::before`) — filete de `clamp(20px, 4vw, 34px)` antes do rótulo,
+  com `gap: 14px`.
+- **Eyebrow centralizada** (`.section-head .eyebrow::after`) — quando a eyebrow está num
+  cabeçalho de seção centralizado, ganha um **segundo** filete depois do texto, formando
+  uma composição simétrica.
+- **Bullets de lista** — o mesmo filete curto marca cada item em `.plan-card__list`,
+  `.who__list` e `.includes__item`, no lugar de um marcador redondo.
 
-## Ênfase com `<em>` — *Camada A*
+Uma lista nova segue esse motivo, não `list-style: disc`.
 
-`<em>` não é itálico genérico — é o "grifo de marca": `font-style: italic`,
-`font-weight: 400`, `color: var(--color-primary)`. O peso **não** é maior que o do texto
-ao redor: o destaque vem do itálico serifado e da cor bronze, não de negrito. Usado para
-destacar uma palavra-chave dentro de um título ou frase (ex.: "caiba na *sua rotina*",
-"Acompanhamento *Trimestral*"). É o único mecanismo de ênfase textual usado no site —
-não existe, por exemplo, um padrão de texto em negrito colorido ou sublinhado para o
-mesmo propósito. Reutilizar `<em>` para qualquer nova ênfase textual, nos dois projetos.
+## Ênfase: itálico dourado, nunca negrito
 
-## Quebra de linha: títulos equilibram, parágrafos não — *Camada B*
+`<em>` é o grifo da marca: itálico, peso `400`, cor `var(--gold)`. É assim que se destaca
+uma palavra dentro de um título ("caiba na *sua rotina*", "Acompanhamento *Trimestral*") e
+é assim que o sobrenome aparece na assinatura.
 
-`text-wrap: balance` está ligado em `h1`, `h2` e `h3` (regra global do reset), para um
-título nunca terminar com uma palavra sozinha na última linha.
+**Contraste se faz por peso leve e tamanho, não por engrossamento.** Títulos são `300`.
+Se um título precisa de mais presença, aumente o tamanho ou o respiro em volta — não o
+peso.
 
-**Nos parágrafos, não.** Isso foi testado no `.final-cta` e reprovado pela usuária: com
-`balance`, as duas linhas de cada parágrafo ficam quase do mesmo tamanho e, empilhadas
-sob um `h2` centralizado, o conjunto vira um bloco afunilado — o texto passa a "desenhar
-um triângulo" no meio da seção. O visual desejado é o parágrafo preenchendo a linha
-normalmente, mesmo que a última fique curta.
+## Quebra de linha: títulos equilibram, parágrafos centralizados não
 
-Ou seja: não aplique `text-wrap: balance` (nem `pretty`) em parágrafo centralizado, e não
-"conserte" uma última linha curta de parágrafo — é uma decisão de estilo, não um defeito.
-Se um parágrafo específico realmente precisar de quebra controlada, prefira ajustar o
-`max-width` do bloco ou reescrever a frase.
+`text-wrap: balance` está ligado em `h1`–`h4`, para um título nunca terminar com uma
+palavra sozinha na última linha. Em parágrafo comum vale `text-wrap: pretty`.
 
-## Contraste por peso, não por engrossamento — *Camada A*
+**Em parágrafo centralizado, nenhum dos dois.** Isso foi testado no `.final-cta` e
+reprovado pela usuária: com o reequilíbrio, as linhas ficam quase do mesmo tamanho e,
+empilhadas sob um `h2` centralizado, o conjunto vira um bloco afunilado — o texto passa a
+"desenhar um triângulo" no meio da seção. O visual desejado é o parágrafo preenchendo a
+linha normalmente, mesmo que a última fique curta.
 
-A hierarquia da página é construída com **tamanho, respiro e cor**, nunca engrossando a
-fonte. Títulos ficam em `300`, corpo em `300`, e o único peso alto do site é o `600` do
-nome na assinatura. Se um elemento novo parece "sumir", aumente o tamanho, o espaço em
-volta ou troque para itálico bronze — não suba o `font-weight`.
+Por isso `.hero__inner p`, `.who__content p`, `.section-head p`, `.services__payment` e
+`.final-cta p` recebem `text-wrap: auto` explicitamente. Não "conserte" uma última linha
+curta de parágrafo centralizado — é uma decisão de estilo, não um defeito. Se um
+parágrafo realmente precisar de quebra controlada, ajuste o `max-width` do bloco ou
+reescreva a frase.
 
-## Hover / elevação — *Camada B*
+## Hover e elevação
 
-Padrão recorrente em elementos interativos: no hover, o elemento sobe
-(`transform: translateY(-2px)` em botões, `translateY(-6px)` em `.plan-card`) e a
-sombra escala de `--shadow-sm` para `--shadow-md`. Links de texto simples (`.nav__link`,
-`.footer__links a`) não sobem — só mudam de cor para `--color-primary`. Ou seja,
-existem dois padrões de hover, aplicados por tipo de elemento:
-- **Elementos "sólidos"** (botão, card): elevação (translateY + escala de sombra).
-- **Links de texto simples**: só mudança de cor.
+- **Botões** sobem `translateY(-2px)`. O primário ganha `--shadow-gold` (o brilho dourado
+  que confirma a ação principal) e `filter: brightness(1.06)`; o outline ganha borda
+  dourada e o preenchimento `--gold-wash`.
+- **Cards** (`.plan-card`, `.step`, `.includes__item`) sobem e trocam `--shadow-sm` por
+  `--shadow-md`.
+- **Links de navegação** ganham um filete dourado que cresce da esquerda
+  (`transform: scaleX()` com `transform-origin` alternando entre `right` e `left`), e a
+  cor sobe de `--text-muted` para `--text`.
+- **Links de texto simples** só mudam de cor para `--gold`.
 
-Ao criar um componente interativo novo, escolher entre esses dois padrões conforme o
-elemento seja "sólido" (superfície com sombra) ou um link de texto simples — não
-inventar um terceiro tipo de feedback de hover.
+Toda transição usa `var(--ease)` — `cubic-bezier(.22, .61, .36, 1)`. Essa curva é da
+marca; não misture `ease-in-out` no meio.
 
-## Breakpoints compartilhados — *Camada B*
+## Entrada ao rolar
 
-O site usa um conjunto fixo e já repetido de breakpoints (`max-width`):
-`1080px`, `900px`, `768px`, `620px`, `600px`, `560px`, `480px` (lista completa e uso de
-cada um em `tokens.md`). Um componente novo deve quebrar nesses mesmos valores sempre
-que possível, em vez de introduzir um breakpoint específico só para ele.
+Blocos de conteúdo recebem `data-reveal`: começam em `opacity: 0` e `translateY(22px)`, e
+a classe `.is-visible` (adicionada por um `IntersectionObserver`, uma vez só) os traz para
+o lugar em `.7s`.
 
-## Réplica de UI de terceiros (exceção de cor) — *Camada C*
+Para uma grade em que os itens devem entrar em cascata, o container recebe
+`data-reveal-stagger` e cada filho um `style="--i:N"` — o atraso é
+`calc(var(--i, 0) * 70ms)`. Reutilize esse par em vez de escrever uma animação nova.
 
-O botão flutuante (`.whatsapp-float`) e o fundo de chat do mockup (`.whatsapp-mock__body`)
-usam cores fixas fora da paleta da marca (verde `#25d366`, chat `#f3efe7`/`#2a231c`)
-porque replicam a identidade visual **do WhatsApp**, não da marca Rafaela Schumacher.
-Repare que o resto do card de depoimento **é** da marca: a barra do cabeçalho usa o
-degradê bronze oficial, não o verde do WhatsApp.
+## Movimento reduzido é obrigatório
 
-Há ainda uma segunda exceção do mesmo tipo: `.whatsapp-mock__body--photo` usa `#f6f2ea`
-para casar com o papel de parede que já vem dentro dos prints de conversa, de modo que a
-imagem se funda ao card em vez de aparecer colada sobre um branco.
+O bloco `@media (prefers-reduced-motion: reduce)` no fim do CSS desliga o scroll suave,
+força todo `[data-reveal]` a ficar visível e reduz qualquer transição/animação a `.01ms`.
+Qualquer animação nova precisa continuar coberta por ele — e por isso o bloco fica **no
+fim do arquivo**, para vencer no cascade. Não mova para cima.
 
-Essas são as únicas situações no código atual em que uma cor fora do token é aceitável:
-quando o elemento imita a UI de um produto externo reconhecível, ou quando precisa casar
-com o conteúdo de uma imagem real. Isso não abre precedente geral para cores soltas —
-qualquer novo caso desse tipo deve ser confirmado com o usuário antes de ser tratado como
-uma exceção válida.
+## Acessibilidade que já está resolvida
 
-## Animação de entrada ao rolar a página — *Camada B*
+Estes pontos já funcionam e não devem regredir:
 
-Qualquer bloco de conteúdo relevante (mas não elementos pequenos isolados como um único
-ícone) recebe o atributo `data-reveal`. O `IntersectionObserver` em `js/main.js` observa
-esses blocos com `threshold: 0.15` e adiciona `.is-visible` na primeira vez que o bloco
-entra na viewport, depois para de observar (`unobserve`) — ou seja, a animação acontece
-uma única vez por elemento, nunca se repete ao rolar para cima e para baixo. Reaproveitar
-esse comportamento exato (observar uma vez, `threshold: 0.15`) ao aplicar `data-reveal`
-em conteúdo novo.
+- **Link "pular para o conteúdo"** (`.skip-link`), escondido acima da tela até receber
+  foco.
+- **Foco visível**: `outline: 2px solid var(--gold-bright)` com `outline-offset: 3px`,
+  aplicado via `:where(a, button, summary, [tabindex]):focus-visible`. Dentro de `.panel`
+  o anel vira `#F4EFE6`, senão some no fundo escuro.
+- **Alvos de toque de no mínimo 44px** em todo controle. O botão de tema e o de menu têm
+  exatamente 44×44; os botões têm `min-height: 48px`.
+- **Menu mobile**: escurece o fundo (`.nav-scrim`), trava a rolagem da página
+  (`body.nav-open { overflow: hidden }`), fecha no `Esc` e prende o `Tab` dentro da gaveta
+  enquanto está aberto.
+- **Lightbox de depoimento**: `<dialog>` nativo, fecha no `Esc` e no clique fora, e
+  devolve o foco ao botão que o abriu.
+- **FAQ**: `aria-expanded` e `aria-controls` no botão, altura animada por `max-height`.
 
-## O que não está aqui
+## A gaveta do menu não pode criar rolagem lateral
 
-Regras de motion tokens nomeados (durações/easings com nome), de espaçamento em escala,
-de ícones e de estados de foco/erro/desabilitado **não são padrões existentes** — são
-lacunas do design system, listadas em "Decisões em aberto" em `SKILL.md`. Não inferir um
-padrão para essas áreas a partir do código atual além do que está descrito aqui.
+A `.nav` mobile fica estacionada fora da tela à direita (`transform: translateX(100%)`).
+Sem tratamento, isso cria rolagem horizontal no celular e empurra o botão flutuante do
+WhatsApp para fora da borda.
+
+A solução em uso é `overflow-x: clip` em `html` **e** em `body` — `clip`, e não `hidden`,
+porque `hidden` cria um contexto de rolagem e quebraria o `position: sticky` do header.
+Se você mexer no header ou na gaveta, **teste as duas coisas juntas**: ausência de rolagem
+lateral e o header continuando grudado no topo.
+
+## O header tem um limite de largura real
+
+O header inteiro — selo + nome + cargo, sete links, o CTA e o botão de tema — ocupa cerca
+de 1090px. O container tem 1160px. A folga é de algumas dezenas de pixels, e é por isso
+que a navegação vira gaveta abaixo de **1180px**.
+
+Esse número está em três lugares que precisam andar juntos:
+
+| Onde | O quê |
+|---|---|
+| `css/styles.css` | `@media (max-width: 1180px)` — transforma a `.nav` em gaveta |
+| `css/styles.css` | `@media (min-width: 1181px)` — esconde o `.nav-scrim` |
+| `js/main.js` | `matchMedia('(min-width: 1181px)')` — fecha o menu ao voltar para desktop |
+
+**Ao adicionar ou remover um item do menu, remeça o header e ajuste os três.** Um item a
+mais sem esse ajuste empurra o botão de tema para fora da tela — e como o CSS usa
+`overflow-x: clip`, ele some sem gerar barra de rolagem, ou seja, sem nenhum aviso visual.
+
+## Imagens
+
+- Toda foto entra em **WebP com fallback JPG**, via `<picture>` + `<source>`.
+- Toda `<img>` declara `width` e `height` — é isso que impede o layout de "pular" enquanto
+  a página carrega.
+- Fotos abaixo da primeira dobra usam `loading="lazy"` e `decoding="async"`.
+- O formato oficial de foto de pessoa é o **painel retangular alto** (`.about-photo`), com
+  cantos arredondados — nunca recorte circular.
+
+## Reuso de breakpoints
+
+Os breakpoints em uso estão listados em `tokens.md`. Reutilize um valor existente em vez
+de criar uma quebra nova só para um componente — cada breakpoint novo é mais um lugar onde
+o layout pode divergir entre seções.

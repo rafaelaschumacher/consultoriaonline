@@ -1,0 +1,16 @@
+{
+  "name": "Rafaela Schumacher — Nutricionista",
+  "short_name": "Rafaela Schumacher",
+  "description": "Acompanhamento nutricional online com plano alimentar individualizado.",
+  "start_url": "/consultoriaonline/",
+  "scope": "/consultoriaonline/",
+  "display": "standalone",
+  "background_color": "#0F0E0C",
+  "theme_color": "#0F0E0C",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "assets/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "assets/favicon-32.png", "type": "image/png", "sizes": "32x32" },
+    { "src": "assets/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}
