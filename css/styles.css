@@ -584,6 +584,8 @@ a:focus-visible, button:focus-visible {
   max-width: 640px;
   margin: 0 auto 16px;
   font-size: 0.95rem;
+  /* Equilibra as linhas para nenhuma terminar com uma palavra solta. */
+  text-wrap: balance;
 }
 .final-cta__note { font-weight: 400; color: rgba(255, 255, 255, 0.92); }
 .final-cta__inner p:last-of-type { margin-bottom: 40px; }

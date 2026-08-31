@@ -72,6 +72,18 @@ destacar uma palavra-chave dentro de um título ou frase (ex.: "caiba na *sua ro
 não existe, por exemplo, um padrão de texto em negrito colorido ou sublinhado para o
 mesmo propósito. Reutilizar `<em>` para qualquer nova ênfase textual, nos dois projetos.
 
+## Nenhuma linha termina com palavra solta — *Camada B*
+
+Todo texto centralizado usa `text-wrap: balance`, que distribui as palavras para as
+linhas ficarem de comprimento parecido em vez de deixar uma órfã na última linha. Já vale
+para `h1`, `h2` e `h3` (regra global do reset) e para os parágrafos do `.final-cta`.
+
+Ao criar um bloco de texto centralizado novo — um subtítulo, uma chamada, um card com
+texto ao centro — aplique `text-wrap: balance` junto. Reduzir `max-width` não resolve:
+sem `balance`, o texto continua preenchendo a linha até o limite e jogando o resto para
+baixo (medido: `583px + 246px` vira `411px + 418px` com a propriedade ligada). Em
+navegadores sem suporte, o texto simplesmente quebra como antes — não há prejuízo.
+
 ## Contraste por peso, não por engrossamento — *Camada A*
 
 A hierarquia da página é construída com **tamanho, respiro e cor**, nunca engrossando a
