@@ -72,17 +72,21 @@ destacar uma palavra-chave dentro de um título ou frase (ex.: "caiba na *sua ro
 não existe, por exemplo, um padrão de texto em negrito colorido ou sublinhado para o
 mesmo propósito. Reutilizar `<em>` para qualquer nova ênfase textual, nos dois projetos.
 
-## Nenhuma linha termina com palavra solta — *Camada B*
+## Quebra de linha: títulos equilibram, parágrafos não — *Camada B*
 
-Todo texto centralizado usa `text-wrap: balance`, que distribui as palavras para as
-linhas ficarem de comprimento parecido em vez de deixar uma órfã na última linha. Já vale
-para `h1`, `h2` e `h3` (regra global do reset) e para os parágrafos do `.final-cta`.
+`text-wrap: balance` está ligado em `h1`, `h2` e `h3` (regra global do reset), para um
+título nunca terminar com uma palavra sozinha na última linha.
 
-Ao criar um bloco de texto centralizado novo — um subtítulo, uma chamada, um card com
-texto ao centro — aplique `text-wrap: balance` junto. Reduzir `max-width` não resolve:
-sem `balance`, o texto continua preenchendo a linha até o limite e jogando o resto para
-baixo (medido: `583px + 246px` vira `411px + 418px` com a propriedade ligada). Em
-navegadores sem suporte, o texto simplesmente quebra como antes — não há prejuízo.
+**Nos parágrafos, não.** Isso foi testado no `.final-cta` e reprovado pela usuária: com
+`balance`, as duas linhas de cada parágrafo ficam quase do mesmo tamanho e, empilhadas
+sob um `h2` centralizado, o conjunto vira um bloco afunilado — o texto passa a "desenhar
+um triângulo" no meio da seção. O visual desejado é o parágrafo preenchendo a linha
+normalmente, mesmo que a última fique curta.
+
+Ou seja: não aplique `text-wrap: balance` (nem `pretty`) em parágrafo centralizado, e não
+"conserte" uma última linha curta de parágrafo — é uma decisão de estilo, não um defeito.
+Se um parágrafo específico realmente precisar de quebra controlada, prefira ajustar o
+`max-width` do bloco ou reescrever a frase.
 
 ## Contraste por peso, não por engrossamento — *Camada A*
 
