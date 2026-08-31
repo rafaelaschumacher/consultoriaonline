@@ -179,10 +179,15 @@ expansível — inclusive uma seção de ajuda/FAQ na plataforma de pacientes.
 
 ## Retrato em painel — `.about-photo` — *Camada B*
 
-Foto real num painel retangular vertical: `aspect-ratio: 4 / 5`, `object-fit: cover`,
-`object-position: 50% 20%` (enquadra o rosto, não o centro geométrico),
-`border-radius: var(--radius-lg)` e `--shadow-md`. É o formato oficial para foto de
-pessoa na marca — retangular alto com cantos arredondados, nunca recortada em círculo.
+Foto real num painel retangular vertical: `aspect-ratio: 2 / 3`, `object-fit: cover`,
+`border-radius: var(--radius-lg)` e `--shadow-md`, numa coluna de `0.85fr` contra `1fr`
+do texto. É o formato oficial para foto de pessoa na marca — retangular alto com cantos
+arredondados, nunca recortada em círculo.
+
+A proporção `2 / 3` é deliberada: é a da própria foto, então **nada é cortado**. Ao
+trocar a imagem, prefira outra na mesma proporção vertical; se ela vier em outro formato,
+ajuste `object-position` para manter o rosto na parte alta do painel em vez de aceitar o
+corte no centro geométrico.
 
 ```html
 <img class="about-photo" src="assets/sobre-mim.jpg" alt="Rafaela Schumacher treinando na academia">

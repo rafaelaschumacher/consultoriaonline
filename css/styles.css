@@ -275,15 +275,17 @@ a:focus-visible, button:focus-visible {
 .about { background: var(--color-bg-alt); }
 .about__inner {
   display: grid;
-  grid-template-columns: 0.62fr 1fr;
+  grid-template-columns: 0.85fr 1fr;
   gap: 64px;
   align-items: center;
 }
+/* Proporção 2:3 = a da própria foto, então nada é cortado. Ao trocar a imagem,
+   manter esse formato vertical para o painel continuar sem corte. */
 .about-photo {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
-  object-position: 50% 20%;
+  object-position: 50% 50%;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
 }
