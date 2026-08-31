@@ -164,6 +164,17 @@ seção de ajuda/FAQ na plataforma de pacientes.
   mesmo gradiente a 35% de opacidade, para onde fotos reais entrarão depois. Ao trocar
   por uma foto real, remover a classe `.photo-placeholder` e manter só o container.
 
+## Monograma "RS" (favicon) — `assets/favicon.svg` — *Camada A*
+
+Círculo sólido `--color-primary-dark` (`#4f5d3f`), iniciais "RS" em Playfair Display
+peso 900 (black), cor `--color-bg` (`#fdfbf6`), sem gradiente e sem anel/borda. É uma
+versão simplificada do monograma em anel fino de um sistema de marca mais amplo
+(logo + paleta) fornecido pela usuária em 2026-08-31 — o anel de 1px e o peso regular
+da Playfair não seguram a leitura em tamanho real de favicon (16–32px, testado);
+peso 900 + sem anel continua legível nesse tamanho. Se um monograma "RS" for
+necessário em outro contexto (não-favicon, com mais espaço), reavaliar se o anel fino
+original do sistema de marca é aplicável ali, em vez de reusar esta versão simplificada.
+
 ## Animação de entrada — `[data-reveal]` — *Camada B*
 
 Definição CSS: linha ~100. Comportamento: `js/main.js`, bloco "Scroll reveal" (via
