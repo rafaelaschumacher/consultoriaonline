@@ -210,14 +210,21 @@ arredondados, **nunca recortada em círculo**.
 
 A proporção `2 / 3` é deliberada. **Corte a imagem nessa proporção antes de subir**, num
 editor, decidindo onde o corte cai — não deixe o `object-fit: cover` cortar pelo centro
-geométrico, que quase nunca é onde está o rosto. O retrato atual veio em 896×1200 (3:4) e
-foi cortado para 740×1110 a partir de (85, 20), centrado no sujeito e terminando logo
-abaixo das mãos. `object-position` é o último recurso, para quando não dá para recortar o arquivo.
+geométrico, que quase nunca é onde está o rosto. O retrato atual veio em 1792×2400 (3:4),
+foi cortado para 1480×2220 a partir de (170, 40) — centrado no sujeito, terminando logo
+abaixo das mãos — e reduzido para 1020×1530 na entrega. `object-position` é o último
+recurso, para quando não dá para recortar o arquivo.
 
-**Corte fechado custa resolução.** O painel exibe `470×704` no desktop. Um corte de busto
-num arquivo de 896×1200 sobra `533×800` (1,13× de densidade) e um de peito para cima sobra
-`440×660` (0,94×) — visivelmente mais macio que o atual em tela retina. Meça a densidade
-antes de fechar o enquadramento: `largura do recorte ÷ 470`.
+**Corte fechado custa resolução.** O painel exibe `470×704` no desktop e `340×510` no
+celular, então o alvo de entrega é o maior dos dois em pixels físicos: `940` para cobrir um
+desktop 2× e `1020` para cobrir um celular 3×. Acima disso o arquivo pesa sem que tela
+nenhuma consiga mostrar a diferença. Meça a densidade antes de fechar o enquadramento:
+`largura do recorte ÷ 470` no desktop, `÷ 340` no celular. O retrato atual entrega 2,17× e
+3,00×.
+
+**Peça o original na maior resolução disponível.** Um corte de busto num arquivo de
+896×1200 sobra `533×800` (1,13×) e um de peito para cima sobra `440×660` (0,94×) —
+visivelmente macios em tela retina. O mesmo enquadramento num arquivo 2× nasce com folga.
 
 `.about__credential` é uma legenda **opcional**: rótulo em caixa alta dourado (`.64rem`,
 `letter-spacing: .22em`) precedido de um filete de 24px. Use quando a foto puder ser lida
