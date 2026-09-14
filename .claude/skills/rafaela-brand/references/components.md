@@ -211,8 +211,10 @@ arredondados, **nunca recortada em círculo**.
 A proporção `2 / 3` é deliberada. **Corte a imagem nessa proporção antes de subir**, num
 editor, decidindo onde o corte cai — não deixe o `object-fit: cover` cortar pelo centro
 geométrico, que quase nunca é onde está o rosto. O retrato atual veio em 1792×2400 (3:4),
-foi cortado para 1480×2220 a partir de (170, 40) — centrado no sujeito, terminando logo
-abaixo das mãos — e reduzido para 1020×1530 na entrega. `object-position` é o último
+foi cortado para 1407×2110 a partir de (233, 150) — centrado no sujeito, terminando na
+cintura — e reduzido para 1020×1530 na entrega. O respiro acima da cabeça é de 90px, ~4%
+da altura do quadro: **fechar o topo obriga a estreitar as laterais junto**, senão a
+proporção 2:3 quebra, então cada corte de respiro vem com um pouco de aproximação. `object-position` é o último
 recurso, para quando não dá para recortar o arquivo.
 
 **Corte fechado custa resolução.** O painel exibe `470×704` no desktop e `340×510` no
