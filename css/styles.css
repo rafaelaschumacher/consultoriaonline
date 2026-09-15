@@ -519,10 +519,13 @@ body.nav-open { overflow: hidden; }
   border: 1px solid var(--gold-dim);
   border-radius: var(--radius-lg);
 }
+/* Sem `aspect-ratio` e sem `object-fit`: a altura sai da proporção do próprio
+   arquivo, então o card se adapta à imagem e o recorte chega inteiro à tela.
+   O hero continua com o painel 2:3 fixo — lá a coluna tem altura a defender. */
 .about-photo {
+  display: block;
   width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
 }
