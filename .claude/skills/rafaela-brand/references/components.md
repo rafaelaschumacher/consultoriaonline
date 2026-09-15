@@ -211,11 +211,26 @@ arredondados, **nunca recortada em círculo**.
 A proporção `2 / 3` é deliberada. **Corte a imagem nessa proporção antes de subir**, num
 editor, decidindo onde o corte cai — não deixe o `object-fit: cover` cortar pelo centro
 geométrico, que quase nunca é onde está o rosto. O retrato atual veio em 1792×2400 (3:4),
-foi cortado para 1407×2110 a partir de (233, 150) — centrado no sujeito, terminando na
-cintura — e reduzido para 1020×1530 na entrega. O respiro acima da cabeça é de 90px, ~4%
-da altura do quadro: **fechar o topo obriga a estreitar as laterais junto**, senão a
-proporção 2:3 quebra, então cada corte de respiro vem com um pouco de aproximação. `object-position` é o último
+foi cortado para 1300×1950 a partir de (259, 184) e reduzido para 1020×1530 na entrega.
+**Fechar o topo obriga a estreitar as laterais junto**, senão a proporção 2:3 quebra —
+cada corte de respiro vem com um pouco de aproximação. `object-position` é o último
 recurso, para quando não dá para recortar o arquivo.
+
+**Quando o recorte vier pronto do cliente, ele quase nunca é 2:3.** O deste retrato veio
+em 3:4 (1456×1950, a região `(180, 184)`–`(1636, 2134)` do original). Encaixar no painel
+custa 156px, e a escolha é de onde tirá-los: manter a **altura integral** e aparar as
+laterais preserva o que o enquadramento escolhido de fato decide — quanto fecha em cima,
+onde corta embaixo. Foi o que se fez aqui: 79px à esquerda, 77px à direita, centrado no
+eixo do sujeito.
+
+Se o arquivo chegar já recortado, **recorte do original mesmo assim**. Localize a região
+por casamento de imagem e corte de lá: o arquivo do cliente costuma trazer uma segunda
+compressão JPEG que o original não tem.
+
+A alternativa — tirar `aspect-ratio` e `object-fit` e deixar o card seguir a proporção do
+arquivo — funciona e foi testada, mas muda o desenho: o painel deixa de ter altura
+previsível e a seção encolhe (629px contra 704px). Só faça isso se for decisão de
+identidade, não para resolver um recorte fora de proporção.
 
 **Corte fechado custa resolução.** O painel exibe `470×704` no desktop e `340×510` no
 celular, então o alvo de entrega é o maior dos dois em pixels físicos: `940` para cobrir um
