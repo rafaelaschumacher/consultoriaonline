@@ -29,7 +29,7 @@ componente existente em vez de recriar.
 | Card de plano | `.plan-card`, `.plan-card--highlight`, `.plan-card__badge` | B (padrão de card) / C (conteúdo "planos") |
 | FAQ accordion | `.faq__item`, `.faq__question`, `.faq__answer` | B |
 | Painel escuro | `.panel` | B |
-| Retrato em painel | `.about-photo`, `.about__credential` | B |
+| Retrato em painel | `.hero-photo`, `.about-photo`, `.about__credential` | B |
 | Lightbox de imagem | `.lightbox` | B |
 | Botão de tema | `.theme-toggle` | B |
 | Link "pular para o conteúdo" | `.skip-link` | B |
@@ -201,7 +201,7 @@ Seção de fundo escuro que marca uma virada na página. Usa `--panel-grad` (rad
 No site é usado em `.who` ("Para você") e `.final-cta`. Basta somar a classe:
 `<section class="who panel">`.
 
-## Retrato em painel — `.about-photo` + `.about__credential` — *Camada B*
+## Retrato em painel — `.hero-photo`, `.about-photo` + `.about__credential` — *Camada B*
 
 Foto real num painel retangular vertical: `aspect-ratio: 2 / 3`, `object-fit: cover`,
 `border-radius: var(--radius-lg)` e `--shadow-md`, numa coluna de `.85fr` contra `1fr` do
@@ -238,10 +238,45 @@ carrega esse risco e dispensa a legenda; é por isso que ela não aparece na hom
 <figure class="about__figure" data-reveal>
   <picture>
     <source srcset="assets/retrato.webp" type="image/webp">
-    <img class="about-photo" src="assets/retrato.jpg" width="740" height="1110"
+    <img class="about-photo" src="assets/retrato.jpg" width="1020" height="1530"
          alt="…" loading="lazy" decoding="async">
   </picture>
   <!-- <figcaption class="about__credential">Olympia Amateur Brasil · 2025</figcaption> -->
+</figure>
+```
+
+### O mesmo painel no hero — `.hero-photo`
+
+O hero usa o mesmo desenho: `.hero-photo` repete as cinco declarações de
+`.about-photo`. Duas fotos diferentes da mesma pessoa, em painéis do mesmo formato —
+uma ao abrir o site, outra no meio da rolagem.
+
+**Os painéis não têm o mesmo tamanho, e isso mudou o corte.** O do hero exibe `427×640`
+no desktop, contra `470×704` do Sobre. Repetir ali o corte de cintura deixaria o rosto
+*menor* do que ele já aparece embaixo — o contrário do que um hero precisa. Por isso o
+retrato do hero é mais aberto no arquivo mas o sujeito ocupa mais quadro: corte
+`1467×2200` a partir de `(137, 94)`, entregue em `900×1350` (densidade 2,11×).
+
+**Ao abrir o enquadramento, abra o respiro junto.** Crescer o recorte só para baixo cola
+o sujeito no topo e joga todo o vazio embaixo — lê como corte errado, não como
+enquadramento aberto. Aqui o respiro acima da cabeça é 10% da altura do quadro, contra
+os ~4% do Sobre, que é mais fechado.
+
+Abaixo de 860px o hero empilha e a foto vai **acima** do texto, limitada a `200px` — o
+ponto dela é o rosto aparecer antes de qualquer rolagem. Em 300px o título era empurrado
+para fora da primeira tela; abaixo do texto, a foto é que saía. As duas coisas não cabem
+inteiras num celular, e a largura da foto é a variável que resolve.
+
+A do hero carrega com `fetchpriority="high"` e sem `loading="lazy"`: ela está na primeira
+tela. A do Sobre continua `loading="lazy"`.
+
+```html
+<figure class="hero__figure" data-reveal>
+  <picture>
+    <source srcset="assets/hero-retrato.webp" type="image/webp">
+    <img class="hero-photo" src="assets/hero-retrato.jpg" width="900" height="1350"
+         alt="…" fetchpriority="high" decoding="async">
+  </picture>
 </figure>
 ```
 
