@@ -277,10 +277,16 @@ o sujeito no topo e joga todo o vazio embaixo — lê como corte errado, não co
 enquadramento aberto. Aqui o respiro acima da cabeça é 10% da altura do quadro, contra
 os ~4% do Sobre, que é mais fechado.
 
-Abaixo de 860px o hero empilha e a foto vai **acima** do texto, limitada a `200px` — o
-ponto dela é o rosto aparecer antes de qualquer rolagem. Em 300px o título era empurrado
-para fora da primeira tela; abaixo do texto, a foto é que saía. As duas coisas não cabem
-inteiras num celular, e a largura da foto é a variável que resolve.
+Abaixo de 860px o hero empilha e a foto vai **acima** do texto, limitada a `340px` — o
+mesmo limite do retrato do Sobre, para não existirem duas larguras de retrato no celular.
+O ponto dela é o rosto aparecer antes de qualquer rolagem, com presença suficiente para
+sustentar a primeira tela sozinho.
+
+O limite era `200px` até 2026-09-22, quando a usuária pediu o retrato maior no celular.
+Aquele valor preservava o `h1` **inteiro** na primeira tela; com `340px`, o título começa
+na primeira tela e termina abaixo dela. Foi uma troca deliberada: título inteiro e foto
+com presença não cabem juntos num celular, e a largura da foto continua sendo a variável
+que resolve — agora decidida a favor da foto.
 
 A do hero carrega com `fetchpriority="high"` e sem `loading="lazy"`: ela está na primeira
 tela. A do Sobre continua `loading="lazy"`.

@@ -565,7 +565,7 @@ body.nav-open { overflow: hidden; }
   /* Empilha na mesma largura do Sobre, e o retrato vai para cima do texto:
      o ponto do hero é o rosto aparecer antes de qualquer rolagem. */
   .hero__inner { grid-template-columns: 1fr; text-align: center; }
-  .hero__figure { order: -1; max-width: 200px; margin-inline: auto; }
+  .hero__figure { order: -1; max-width: 340px; margin-inline: auto; }
   .hero__content { margin-inline: auto; }
   .hero__lead { margin-inline: auto; }
   .hero__actions, .hero__trust { justify-content: center; }
